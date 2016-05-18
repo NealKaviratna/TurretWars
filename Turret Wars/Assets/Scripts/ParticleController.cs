@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TurretBehaviour : MonoBehaviour {
-
-    public Weapon[] weapons;
+public class ParticleController : Poolable {
 
 	// Use this for initialization
 	void Start () {
@@ -12,7 +10,6 @@ public class TurretBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        // Translate Mouse movement to look.
 	
 	}
 }

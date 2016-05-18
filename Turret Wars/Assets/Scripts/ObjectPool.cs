@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObjectPool<T> where T : IPoolable, new() {
+public class ObjectPool<T> where T : Poolable, new() {
     
     public int PoolSize;
 
@@ -21,7 +21,7 @@ public class ObjectPool<T> where T : IPoolable, new() {
         }
     }
 
-    public IPoolable Create(Player creator, uint objectId)
+    public Poolable Create(Player creator, uint objectId)
     {
         foreach (T obj in pool)
             if (!obj.InUse) return obj.Create(creator, objectId);

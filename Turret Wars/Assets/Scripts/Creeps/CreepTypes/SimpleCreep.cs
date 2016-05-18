@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class SimpleCreep : IPoolable {
+public class SimpleCreep : Poolable {
 
     #region Creep
     public BoxCollider spawnzone;
@@ -31,7 +31,7 @@ public class SimpleCreep : IPoolable {
         get { return inUse; }
     }
 
-    public override IPoolable Create(Player creator, uint creepId)
+    public override Poolable Create(Player creator, uint creepId)
     {
         this.spawnzone = creator.targetBattlezone.CreepSpawner;
         this.target = creator.targetBattlezone.Nexus.transform;

@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 /// <summary>
-/// IPoolable interface.
+/// Abstract class for objects that can be contained in <see cref="ObjectPool{T}"/>.
 /// </summary>
 /// 
 /// <remarks>
 /// This should really be a interface, hence the name and implementation. But Unity is 
 /// dumb and does not provide a Monobehaviour Interface. So this is abstract.
 /// </remarks>
-public abstract class IPoolable : MonoBehaviour {
+public abstract class Poolable : MonoBehaviour {
 
     public abstract uint ObjectId
     {
@@ -20,7 +20,7 @@ public abstract class IPoolable : MonoBehaviour {
         get;
     }
 
-    public abstract IPoolable Create(Player creator, uint objectId);
+    public abstract Poolable Create(Player creator, uint objectId);
 
     public abstract void Die();
 

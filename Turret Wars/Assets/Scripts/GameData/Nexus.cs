@@ -15,7 +15,6 @@ public class Nexus : MonoBehaviour {
     
     void OnTriggerEnter(Collider coll)
     {
-        Debug.Log(coll.gameObject);
         var creep = coll.gameObject.GetComponent<SimpleCreep>();
         if (creep != null) creep.Die();
     }

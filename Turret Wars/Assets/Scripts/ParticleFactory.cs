@@ -4,15 +4,16 @@ using System.Collections;
 using System.Collections.Generic;
 
 // Will exist on clients
-public class CreepFactory : MonoBehaviour {
+public class ParticleFactory : MonoBehaviour
+{
 
     #region Object Pool declarations
-    private ObjectPool<SimpleCreep> simpleCreepPool;
+    private ObjectPool<> simpleCreepPool;
     #endregion
 
     private Dictionary<uint, Poolable> activeCreeps;
 
-    public Poolable CreateCreep (CreepNo creepNo, Player creator, uint creepId)
+    public Poolable CreateCreep(CreepNo creepNo, Player creator, uint creepId)
     {
         // Debug.Log("Creating: " + creepNo);
         switch (creepNo)
@@ -39,7 +40,8 @@ public class CreepFactory : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         // Would be really cool, but won't work in Unity due to Generics and MB's not playing nice.
         //Type objectPoolType = typeof(ObjectPool<>);
         //foreach (Type t in creepTypes)
@@ -48,16 +50,17 @@ public class CreepFactory : MonoBehaviour {
         //    simpleCreepPool = gameObject.GetComponent<ObjectPool<SimpleCreep>>();
         //    activeCreeps = new Dictionary<uint, IPoolable>();
         //}
-        
+
         var DummyGameObject = Instantiate(Resources.Load("dgo")) as GameObject;
         #region Object Pool instantiation
         simpleCreepPool = new ObjectPool<SimpleCreep>(DummyGameObject);
         #endregion
         activeCreeps = new Dictionary<uint, Poolable>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }
