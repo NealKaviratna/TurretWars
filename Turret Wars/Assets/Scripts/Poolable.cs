@@ -20,7 +20,7 @@ public abstract class Poolable : MonoBehaviour {
         get;
     }
 
-    public abstract Poolable Create(Player creator, uint objectId);
+    public abstract Poolable Create(Player creator, uint objectId, Vector3 position);
 
     public abstract void Die();
 

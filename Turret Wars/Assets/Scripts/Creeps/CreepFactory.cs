@@ -18,7 +18,7 @@ public class CreepFactory : MonoBehaviour {
         switch (creepNo)
         {
             case CreepNo.SimpleCreep:
-                var creep = simpleCreepPool.Create(creator, creepId);
+                var creep = simpleCreepPool.Create(creator, creepId, Vector3.zero);
                 activeCreeps.Add(creepId, creep);
                 return creep;
             default:

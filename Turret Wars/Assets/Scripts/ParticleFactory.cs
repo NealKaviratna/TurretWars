@@ -8,54 +8,30 @@ public class ParticleFactory : MonoBehaviour
 {
 
     #region Object Pool declarations
-    private ObjectPool<> simpleCreepPool;
+    private ObjectPool<Particle> FireParticlePool;
     #endregion
 
-    private Dictionary<uint, Poolable> activeCreeps;
-
-    public Poolable CreateCreep(CreepNo creepNo, Player creator, uint creepId)
+    public Poolable CreateParticle(ParticleType partType, Vector3 position)
     {
         // Debug.Log("Creating: " + creepNo);
-        switch (creepNo)
+        switch (partType)
         {
-            case CreepNo.SimpleCreep:
-                var creep = simpleCreepPool.Create(creator, creepId);
-                activeCreeps.Add(creepId, creep);
-                return creep;
+            case ParticleType.Fire:
+                var part = FireParticlePool.Create(null, 0, position);
+                return part;
             default:
-                Debug.Log("Problem creating creep in factory.");
+                Debug.Log("Problem creating particle in factory.");
                 return null;
-        }
-    }
-
-    public void RecallCreep(uint creepId)
-    {
-        Poolable creep;
-        activeCreeps.TryGetValue(creepId, out creep);
-        if (creep != null)
-        {
-            creep.Recall();
-            activeCreeps.Remove(creepId);
         }
     }
 
     // Use this for initialization
     void Start()
     {
-        // Would be really cool, but won't work in Unity due to Generics and MB's not playing nice.
-        //Type objectPoolType = typeof(ObjectPool<>);
-        //foreach (Type t in creepTypes)
-        //{
-        //    objectPoolType.MakeGenericType(t.MakeGenericType());
-        //    simpleCreepPool = gameObject.GetComponent<ObjectPool<SimpleCreep>>();
-        //    activeCreeps = new Dictionary<uint, IPoolable>();
-        //}
-
         var DummyGameObject = Instantiate(Resources.Load("dgo")) as GameObject;
         #region Object Pool instantiation
-        simpleCreepPool = new ObjectPool<SimpleCreep>(DummyGameObject);
+        FireParticlePool = new ObjectPool<Particle>(DummyGameObject);
         #endregion
-        activeCreeps = new Dictionary<uint, Poolable>();
     }
 
     // Update is called once per frame

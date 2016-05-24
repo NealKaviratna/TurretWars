@@ -31,7 +31,7 @@ public class SimpleCreep : Poolable {
         get { return inUse; }
     }
 
-    public override Poolable Create(Player creator, uint creepId)
+    public override Poolable Create(Player creator, uint creepId, Vector3 position)
     {
         this.spawnzone = creator.targetBattlezone.CreepSpawner;
         this.target = creator.targetBattlezone.Nexus.transform;

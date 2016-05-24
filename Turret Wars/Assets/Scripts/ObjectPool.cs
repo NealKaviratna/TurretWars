@@ -21,11 +21,11 @@ public class ObjectPool<T> where T : Poolable, new() {
         }
     }
 
-    public Poolable Create(Player creator, uint objectId)
+    public Poolable Create(Player creator, uint objectId, Vector3 position)
     {
         foreach (T obj in pool)
-            if (!obj.InUse) return obj.Create(creator, objectId);
-        Debug.Log("No creatures to pull from object pool.");
+            if (!obj.InUse) return obj.Create(creator, objectId, position);
+        Debug.Log("No objects to pull from object pool.");
         return null;
     }
 }
