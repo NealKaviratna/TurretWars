@@ -3,8 +3,8 @@ using System.Collections;
 
 public abstract class Weapon : MonoBehaviour {
 
-    private int level;
-    private float fireRate;
+    protected int level;
+    protected float fireRate;
 
     private BulletBehaviour bulletBehaviour;
 

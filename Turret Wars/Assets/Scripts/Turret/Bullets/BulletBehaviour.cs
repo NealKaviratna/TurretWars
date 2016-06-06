@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class BulletBehaviour : MonoBehaviour {
+public abstract class BulletBehaviour : Poolable {
 
     public GameObject Target;
     public Vector3 TargetPos;
     public TrailRenderer TrailRenderer;
 
+    protected float speed;
     protected bool isHoming;
+    protected bool inUse;
 
     protected void aoeDamage(float DamageBoxDuration = 0.0f, float DamageTimer = 0.0f)
     {
@@ -44,5 +46,38 @@ public abstract class BulletBehaviour : MonoBehaviour {
 	void Update () {
 	    if (this.isHoming)
             if (Target != null) transform.LookAt(Target.transform.position);
+    }
+
+    public override uint ObjectId
+    {
+        get { return 0; }
+    }
+
+
+    public override bool InUse
+    {
+        get { return inUse; }
+    }
+
+    public override Poolable Create(Player player, uint id, Vector3 pos)
+    {
+        this.transform.position = pos;
+        this.inUse = true;
+        return this;
+    }
+
+    public override void Die()
+    {
+
+    }
+
+    public override void Recall()
+    {
+
+    }
+
+    public override string ToString()
+    {
+        return "BulletBehaviour";
     }
 }
