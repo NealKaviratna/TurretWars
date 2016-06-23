@@ -30,7 +30,7 @@ public class CreepController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if (creepIdGen < 100000000000)
+	    if (creepIdGen < 10)
         {
             CmdSpawnAssociatedCreep();
         }

@@ -6,6 +6,9 @@ public class BasicBulletBehaviour : BulletBehaviour {
     void OnCollisionEnter(Collision coll)
     {
         if (coll.collider.tag == "enemy")
+        {
             this.basicDamage();
+            this.Die();
+        }
     }
 }

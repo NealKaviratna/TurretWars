@@ -3,6 +3,9 @@ using System.Collections;
 
 public class BasicMachineGun : Weapon {
 
+    public Player Player;
+    public Transform MuzzleTrans;
+
     private ObjectPool<BasicBulletBehaviour> bulletPool;
 
 	// Use this for initialization
@@ -15,6 +18,19 @@ public class BasicMachineGun : Weapon {
 
     public override void Fire()
     {
+        RaycastHit hitInfo;;
 
+        BulletBehaviour b = bulletPool.Create(Player, 0, MuzzleTrans.position) as BulletBehaviour;
+        if (Physics.Raycast(MuzzleTrans.position, this.transform.forward, out hitInfo))
+        {
+            b.TargetPos = hitInfo.transform.position;
+            b.Target = hitInfo.transform.gameObject;
+        }
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            Fire();
     }
 }

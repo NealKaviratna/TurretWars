@@ -7,9 +7,9 @@ public abstract class BulletBehaviour : Poolable {
     public Vector3 TargetPos;
     public TrailRenderer TrailRenderer;
 
-    protected float speed;
-    protected bool isHoming;
-    protected bool inUse;
+    protected float speed = 10.0f;
+    protected bool isHoming = false;
+    protected bool inUse = false;
 
     protected void aoeDamage(float DamageBoxDuration = 0.0f, float DamageTimer = 0.0f)
     {
@@ -34,12 +34,12 @@ public abstract class BulletBehaviour : Poolable {
     public virtual void Fire() {
         if (TrailRenderer != null) TrailRenderer.enabled = true;
         if (TargetPos != null) transform.LookAt(TargetPos);
-        GetComponent<Rigidbody>().AddForce(Vector3.forward);
+        GetComponent<Rigidbody>().velocity = speed * transform.forward;
     }
 
     // Use this for initialization
     void Start () {
-        this.Fire();
+        this.Recall();
     }
 	
 	// Update is called once per frame
@@ -63,21 +63,25 @@ public abstract class BulletBehaviour : Poolable {
     {
         this.transform.position = pos;
         this.inUse = true;
+        this.gameObject.SetActive(true);
+        this.Fire();
         return this;
     }
 
     public override void Die()
     {
-
+        this.inUse = false;
+        this.gameObject.SetActive(false);
     }
 
     public override void Recall()
     {
-
+        this.inUse = false;
+        this.gameObject.SetActive(false);
     }
 
     public override string ToString()
     {
-        return "BulletBehaviour";
+        return "Bullet";
     }
 }
