@@ -10,10 +10,9 @@ public class SimpleCreep : Poolable {
 
     private float maxHp = 100.0f;
     private uint creepId;
-    private Player creator;
 
     private float hp = 100.0f;
-    private float speed = 0.1f;
+    private float speed = 0.01f;
     private bool inUse = false;
     private CreepNo creepNo = CreepNo.SimpleCreep;
 

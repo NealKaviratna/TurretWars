@@ -7,7 +7,7 @@ public abstract class BulletBehaviour : Poolable {
     public Vector3 TargetPos;
     public TrailRenderer TrailRenderer;
 
-    protected float speed = 10.0f;
+    protected float speed = 100.0f;
     protected bool isHoming = false;
     protected bool inUse = false;
 
@@ -16,9 +16,9 @@ public abstract class BulletBehaviour : Poolable {
 
     }
 
-    protected void basicDamage(float DamageTimer = 0.0f)
+    protected void basicDamage(SimpleCreep target, float DamageTimer = 0.0f)
     {
-
+        target.Die();
     }
 
     private void playParticles()
@@ -46,6 +46,8 @@ public abstract class BulletBehaviour : Poolable {
 	void Update () {
 	    if (this.isHoming)
             if (Target != null) transform.LookAt(Target.transform.position);
+        if (GetComponent<Rigidbody>().velocity.magnitude < 5.0f)
+            this.Die();
     }
 
     public override uint ObjectId
@@ -64,7 +66,6 @@ public abstract class BulletBehaviour : Poolable {
         this.transform.position = pos;
         this.inUse = true;
         this.gameObject.SetActive(true);
-        this.Fire();
         return this;
     }
 

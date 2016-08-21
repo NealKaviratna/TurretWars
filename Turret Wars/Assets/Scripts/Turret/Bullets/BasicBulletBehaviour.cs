@@ -5,10 +5,11 @@ public class BasicBulletBehaviour : BulletBehaviour {
     
     void OnCollisionEnter(Collision coll)
     {
-        if (coll.collider.tag == "enemy")
+        if (coll.collider.tag == "Enemy")
         {
-            this.basicDamage();
-            this.Die();
+            this.basicDamage(coll.gameObject.GetComponent<SimpleCreep>());
         }
+        else if (coll.collider.tag != "Player")
+            this.Die();
     }
 }

@@ -2,15 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 
-// Will only be on server
 public class Game : MonoBehaviour {
-    // Will be replaced by RPC calls
     public CreepFactory CreepFactory;
 
     public List<Player> Players = new List<Player>();
 
+    public Player GetPlayerByID(int id)
+    {
+        return Players[id];
+    }
+
 	// Use this for initialization
 	void Start () {
         CreepFactory = new CreepFactory();
+
+        Players.Add(new Player(0));
+        Players.Add(new Player(1));
 	}
 }

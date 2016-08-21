@@ -2,32 +2,35 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 
 // Will exist on clients
-public class CreepFactory : MonoBehaviour {
+public class CreepFactory : NetworkBehaviour {
 
     #region Object Pool declarations
     private ObjectPool<SimpleCreep> simpleCreepPool;
     #endregion
 
     private Dictionary<uint, Poolable> activeCreeps;
+    private Game game;
 
-    public Poolable CreateCreep (CreepNo creepNo, Player creator, uint creepId)
+    [ClientRpc]
+    public void RpcCreateCreep (CreepNo creepNo, int creator, uint creepId)
     {
-        // Debug.Log("Creating: " + creepNo);
         switch (creepNo)
         {
             case CreepNo.SimpleCreep:
-                var creep = simpleCreepPool.Create(creator, creepId, Vector3.zero);
+                var creep = simpleCreepPool.Create(game.GetPlayerByID(creator), creepId, Vector3.zero);
                 activeCreeps.Add(creepId, creep);
-                return creep;
+                return;
             default:
                 Debug.Log("Problem creating creep in factory.");
-                return null;
+                return;
         }
     }
 
-    public void RecallCreep(uint creepId)
+    [ClientRpc]
+    public void RpcRecallCreep(uint creepId)
     {
         Poolable creep;
         activeCreeps.TryGetValue(creepId, out creep);
@@ -48,7 +51,8 @@ public class CreepFactory : MonoBehaviour {
         //    simpleCreepPool = gameObject.GetComponent<ObjectPool<SimpleCreep>>();
         //    activeCreeps = new Dictionary<uint, IPoolable>();
         //}
-        
+        this.game = FindObjectOfType<Game>();
+
         var DummyGameObject = Instantiate(Resources.Load("dgo")) as GameObject;
         #region Object Pool instantiation
         simpleCreepPool = new ObjectPool<SimpleCreep>(DummyGameObject);
