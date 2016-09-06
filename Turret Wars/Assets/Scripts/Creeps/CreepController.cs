@@ -1,29 +1,33 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
+using System.Collections.Generic;
 
-public class CreepController : NetworkBehaviour {
-
-    public CreepNo creepNo;
-    public Player player;
+// Exists on server
+public class CreepController : NetworkBehaviour
+{
 
     private uint creepIdGen;
-    
+    private GameObject[] creepFactories;
+
     [Command]
-    public void CmdSpawnAssociatedCreep()
+    public void CmdSpawnCreep(int playerID, CreepNo creepNo)
     {
-        //TODO: Generate creepID
-        GameObject.Find("CreepFactory").GetComponent<CreepFactory>().RpcCreateCreep(this.creepNo, player.ID, creepIdGen++);
+        foreach(GameObject cf in creepFactories)
+            cf.GetComponent<CreepFactory>().RpcCreateCreep(creepNo, playerID, creepIdGen++);
     }
 
     [Command]
     public void CmdRecallCreep(uint creepID)
     {
-        GameObject.Find("CreepFactory").GetComponent<CreepFactory>().RpcRecallCreep(creepID);
+        foreach(GameObject cf in creepFactories)
+            cf.GetComponent<CreepFactory>().RpcRecallCreep(creepID);
     }
 
     // Use this for initialization
-    void Start () {
+    public void GameStart()
+    {
         creepIdGen = 0;
-	}
+        creepFactories = GameObject.FindGameObjectsWithTag("CreepFactory");
+    }
 }

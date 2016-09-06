@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class BasicMachineGun : Weapon {
+public class BasicMachineGun : Weapon
+{
 
     public Player Player;
     public Transform MuzzleTrans;
 
     private ObjectPool<BasicBulletBehaviour> bulletPool;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         this.level = 0;
         this.fireRate = 0.5f;
         var DummyGameObject = Instantiate(Resources.Load("dgo")) as GameObject;
@@ -18,7 +21,7 @@ public class BasicMachineGun : Weapon {
 
     public override void Fire()
     {
-        RaycastHit hitInfo;;
+        RaycastHit hitInfo; ;
 
         BulletBehaviour b = bulletPool.Create(Player, 0, MuzzleTrans.position) as BulletBehaviour;
         if (Physics.Raycast(MuzzleTrans.position, this.transform.forward, out hitInfo))
@@ -31,7 +34,8 @@ public class BasicMachineGun : Weapon {
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (!gameObject.transform.parent.gameObject.GetComponent<NetworkIdentity>().isLocalPlayer) return;
+        if (Input.GetKeyDown(KeyCode.Mouse0))
             Fire();
     }
 }

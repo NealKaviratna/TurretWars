@@ -4,8 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
 
-// Will exist on clients
-public class CreepFactory : NetworkBehaviour {
+// Exists on Clients with Player
+public class CreepFactory : NetworkBehaviour
+{
 
     #region Object Pool declarations
     private ObjectPool<SimpleCreep> simpleCreepPool;
@@ -15,7 +16,7 @@ public class CreepFactory : NetworkBehaviour {
     private Game game;
 
     [ClientRpc]
-    public void RpcCreateCreep (CreepNo creepNo, int creator, uint creepId)
+    public void RpcCreateCreep(CreepNo creepNo, int creator, uint creepId)
     {
         switch (creepNo)
         {
@@ -42,7 +43,8 @@ public class CreepFactory : NetworkBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         // Would be really cool, but won't work in Unity due to Generics and MB's not playing nice.
         //Type objectPoolType = typeof(ObjectPool<>);
         //foreach (Type t in creepTypes)
@@ -59,9 +61,10 @@ public class CreepFactory : NetworkBehaviour {
         #endregion
         activeCreeps = new Dictionary<uint, Poolable>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }

@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObjectPool<T> where T : Poolable, new() {
-    
+public class ObjectPool<T> where T : Poolable, new()
+{
+
     public int PoolSize;
 
     private T[] pool;
