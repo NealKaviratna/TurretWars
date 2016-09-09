@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Nexus : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class Nexus : MonoBehaviour
         if (creep != null)
         {
             Lives--;
+            GameObject.Find("UI:Lives").GetComponent<Text>().text = "Lives: " + Lives.ToString();
             creep.Die();
         }
     }

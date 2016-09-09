@@ -11,6 +11,11 @@ public class Game : NetworkBehaviour
 
     public uint creepIdGen = 0;
 
+    private int playerCount = 0;
+
+    /// <summary>
+    /// Setup Game data on client, hook into correct level assets
+    /// </summary>a
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -18,44 +23,40 @@ public class Game : NetworkBehaviour
         this.battlezone2 = GameObject.Find("Battlezone2").GetComponent<Battlezone>();
     }
 
+    /// <summary>
+    /// Fetches player by id, allowing player to get passed across network as int
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public Player GetPlayerByID(int id)
     {
-        Debug.Log(id);
         return Players[id];
     }
 
-    public void AddPlayer(Player player)
+    #region Player Setup
+    /// <summary>
+    /// Runs of server, informs clients of player connecting
+    /// </summary>
+    /// <param name="player"></param>
+    public void AddPlayer()
     {
-        Players.Add(player);
-
-        if (Players.Count == 1)
-        {
-            player.battlezone = battlezone1;
-            player.targetBattlezone = battlezone2;
-
-            GameObject go = GameObject.FindGameObjectsWithTag("CreepController")[0];
-            player.CreepController = go.GetComponent<CreepController>();
-        }
-        else
-        {
-            player.battlezone = battlezone2;
-            player.targetBattlezone = battlezone1;
-
-            GameObject go = GameObject.FindGameObjectsWithTag("CreepController")[1];
-            player.CreepController = go.GetComponent<CreepController>();
-        }
-        
-        RpcUpdateClients(Players.Count);
+        RpcUpdateClients(playerCount++);
     }
-
+    
+    /// <summary>
+    /// Updates client side game data with correct information
+    /// </summary>
+    /// <param name="playerCount"></param>
     [ClientRpc]
     public void RpcUpdateClients(int playerCount)
     {
-        if (playerCount == 1)
+        if (playerCount == 0)
         {
             Debug.LogError("Updating Player 1 Client");
             Player player = GameObject.FindObjectsOfType<Player>()[0].GetComponent<Player>();
-            player.gameObject.name = "Player 1";
+            player.gameObject.name = "LocalPlayer";
+            player.gameObject.GetComponentInChildren<Camera>().enabled = true;
+            player.gameObject.transform.position = GameObject.Find("P1Spawn").transform.position;
             player.ID = 0;
             Players.Add(player);
             player.battlezone = battlezone1;
@@ -63,8 +64,9 @@ public class Game : NetworkBehaviour
 
             GameObject go = GameObject.FindGameObjectsWithTag("CreepController")[0];
             player.CreepController = go.GetComponent<CreepController>();
+            go.name = "LocalCreepController";
         }
-        else if (playerCount == 2 || Players.Count == 0)
+        else if (playerCount == 1 && Players.Count == 0)
         {
 
             Player player = GameObject.FindObjectsOfType<Player>()[1].GetComponent<Player>();
@@ -79,7 +81,9 @@ public class Game : NetworkBehaviour
 
             Debug.LogError("Updating Player 2 Client");
             player = GameObject.FindObjectsOfType<Player>()[0].GetComponent<Player>();
-            player.gameObject.name = "Player 2";
+            player.gameObject.name = "LocalPlayer";
+            player.gameObject.transform.position = GameObject.Find("P2Spawn").transform.position;
+            player.gameObject.GetComponentInChildren<Camera>().enabled = true;
             player.ID = 1;
             Players.Add(player);
             player.battlezone = battlezone2;
@@ -87,6 +91,7 @@ public class Game : NetworkBehaviour
 
             go = GameObject.FindGameObjectsWithTag("CreepController")[1];
             player.CreepController = go.GetComponent<CreepController>();
+            go.name = "LocalCreepController";
         }
         else
         {
@@ -102,4 +107,5 @@ public class Game : NetworkBehaviour
             player.CreepController = go.GetComponent<CreepController>();
         }
     }
+    #endregion
 }

@@ -31,6 +31,12 @@ public class CreepController : NetworkBehaviour
 
     public void RecallCreep(uint creepId)
     {
+        this.CmdRecallCreep(creepId);
+    }
+
+    [Command]
+    public void CmdRecallCreep(uint creepId)
+    {
         this.RpcRecallCreep(creepId);
     }
 

@@ -52,7 +52,7 @@ public class Player : NetworkBehaviour
         NetworkServer.SpawnWithClientAuthority(ccon, connectionToClient);
 
         // Register player with Game
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<Game>().AddPlayer(this);
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<Game>().AddPlayer();
     }
 
     public void Update()
@@ -60,6 +60,14 @@ public class Player : NetworkBehaviour
         if (!isLocalPlayer) return;
 
         if (Input.GetKeyDown(KeyCode.Keypad7))
-            CreepController.SpawnCreep(this.id, CreepNo.SimpleCreep);
+        {
+            if (GetComponent<BankBehaviour>().Gold >= 50)
+            {
+
+                CreepController.SpawnCreep(this.id, CreepNo.SimpleCreep);
+                GetComponent<BankBehaviour>().Gold -= 50;
+                GetComponent<BankBehaviour>().IncomeAmount += 25;
+            }
+        }
     }
 }
