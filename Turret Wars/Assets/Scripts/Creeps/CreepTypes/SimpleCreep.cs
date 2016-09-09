@@ -48,6 +48,9 @@ public class SimpleCreep : Poolable {
     public override void Die()
     {
         GameObject.Find("LocalPlayer").GetComponent<BankBehaviour>().Gold += this.value;
+        GameObject go = Instantiate(Resources.Load("+gold")) as GameObject;
+        go.transform.position = this.transform.position;
+
         if (controller == null)
             controller = GameObject.Find("LocalCreepController").GetComponent<CreepController>();
         controller.RecallCreep(this.creepId);
