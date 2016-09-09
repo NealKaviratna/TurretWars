@@ -45,7 +45,9 @@ public class SimpleCreep : Poolable {
 
     public override void Die()
     {
-        controller.CmdRecallCreep(this.creepId);
+        if (controller == null)
+            controller = GameObject.FindGameObjectWithTag("CreepController").GetComponent<CreepController>();
+        controller.RecallCreep(this.creepId);
         //this.gameObject.SetActive(false);
         //this.inUse = false;
     }
@@ -65,7 +67,6 @@ public class SimpleCreep : Poolable {
     #region Monobehaviour
     void Awake()
     {
-        controller = GameObject.Find("CreepController").GetComponent<CreepController>();
         this.Recall();
     }
 

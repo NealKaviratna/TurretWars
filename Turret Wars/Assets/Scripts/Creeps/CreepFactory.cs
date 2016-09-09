@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
 
-// Exists on Clients with Player
+// Local code for creep system
 public class CreepFactory : NetworkBehaviour
 {
 
@@ -14,9 +14,8 @@ public class CreepFactory : NetworkBehaviour
 
     private Dictionary<uint, Poolable> activeCreeps;
     private Game game;
-
-    [ClientRpc]
-    public void RpcCreateCreep(CreepNo creepNo, int creator, uint creepId)
+    
+    public void CreateCreep(CreepNo creepNo, int creator, uint creepId)
     {
         switch (creepNo)
         {
@@ -29,9 +28,8 @@ public class CreepFactory : NetworkBehaviour
                 return;
         }
     }
-
-    [ClientRpc]
-    public void RpcRecallCreep(uint creepId)
+    
+    public void RecallCreep(uint creepId)
     {
         Poolable creep;
         activeCreeps.TryGetValue(creepId, out creep);

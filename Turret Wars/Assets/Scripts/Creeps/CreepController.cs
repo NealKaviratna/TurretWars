@@ -3,31 +3,50 @@ using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
 
-// Exists on server
+// Contains Networking for Creep system
 public class CreepController : NetworkBehaviour
 {
 
-    private uint creepIdGen;
-    private GameObject[] creepFactories;
+    [SerializeField]
+    private CreepFactory creepFactory;
+
+    private Game game;
+
+    public void SpawnCreep(int playerID, CreepNo creepNo)
+    {
+        this.CmdSpawnCreep(playerID, creepNo);
+    }
 
     [Command]
     public void CmdSpawnCreep(int playerID, CreepNo creepNo)
     {
-        foreach(GameObject cf in creepFactories)
-            cf.GetComponent<CreepFactory>().RpcCreateCreep(creepNo, playerID, creepIdGen++);
+        this.RpcSpawnCreep(creepNo, playerID, game.creepIdGen++);
     }
 
-    [Command]
-    public void CmdRecallCreep(uint creepID)
+    [ClientRpc]
+    public void RpcSpawnCreep(CreepNo creepNo, int playerID, uint creepId)
     {
-        foreach(GameObject cf in creepFactories)
-            cf.GetComponent<CreepFactory>().RpcRecallCreep(creepID);
+        creepFactory.CreateCreep(creepNo, playerID, creepId);
     }
 
-    // Use this for initialization
-    public void GameStart()
+    public void RecallCreep(uint creepId)
     {
-        creepIdGen = 0;
-        creepFactories = GameObject.FindGameObjectsWithTag("CreepFactory");
+        this.RpcRecallCreep(creepId);
+    }
+
+    [ClientRpc]
+    public void RpcRecallCreep(uint creepId)
+    {
+        creepFactory.RecallCreep(creepId);
+    }
+
+    public override void OnStartServer()
+    {
+        this.game = GameObject.FindGameObjectWithTag("GameController").GetComponent<Game>();
+    }
+
+    public override void OnStartClient()
+    {
+        this.creepFactory = GameObject.FindGameObjectWithTag("CreepFactory").GetComponent<CreepFactory>();
     }
 }
