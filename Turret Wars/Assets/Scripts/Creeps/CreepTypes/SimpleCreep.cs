@@ -12,7 +12,7 @@ public class SimpleCreep : Poolable {
     private uint creepId;
     
     public float hp = 100.0f;
-    public float speed = 0.01f;
+    public float speed = 0.1f;
     public int value = 10;
 
     private bool inUse = false;
@@ -47,10 +47,6 @@ public class SimpleCreep : Poolable {
 
     public override void Die()
     {
-        GameObject.Find("LocalPlayer").GetComponent<BankBehaviour>().Gold += this.value;
-        GameObject go = Instantiate(Resources.Load("+gold")) as GameObject;
-        go.transform.position = this.transform.position;
-
         if (controller == null)
             controller = GameObject.Find("LocalCreepController").GetComponent<CreepController>();
         controller.RecallCreep(this.creepId);
