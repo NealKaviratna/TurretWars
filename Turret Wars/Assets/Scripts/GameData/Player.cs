@@ -59,14 +59,65 @@ public class Player : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
+        // TODO: make this cleaner
         if (Input.GetKeyDown(KeyCode.Keypad7))
         {
             if (GetComponent<BankBehaviour>().Gold >= 50)
             {
 
-                CreepController.SpawnCreep(this.id, CreepNo.SimpleCreep);
+                CreepController.SpawnCreep(this.id, CreepNo.Walker1);
                 GetComponent<BankBehaviour>().Gold -= 50;
                 GetComponent<BankBehaviour>().IncomeAmount += 25;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad4))
+        {
+            if (GetComponent<BankBehaviour>().Gold >= 100)
+            {
+
+                CreepController.SpawnCreep(this.id, CreepNo.Walker2);
+                GetComponent<BankBehaviour>().Gold -= 100;
+                GetComponent<BankBehaviour>().IncomeAmount += 50;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            if (GetComponent<BankBehaviour>().Gold >= 150)
+            {
+
+                CreepController.SpawnCreep(this.id, CreepNo.Walker3);
+                GetComponent<BankBehaviour>().Gold -= 150;
+                GetComponent<BankBehaviour>().IncomeAmount += 50;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad8))
+        {
+            if (GetComponent<BankBehaviour>().Gold >= 80)
+            {
+
+                CreepController.SpawnCreep(this.id, CreepNo.Tank1);
+                GetComponent<BankBehaviour>().Gold -= 80;
+                GetComponent<BankBehaviour>().IncomeAmount += 40;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad5))
+        {
+            if (GetComponent<BankBehaviour>().Gold >= 160)
+            {
+
+                CreepController.SpawnCreep(this.id, CreepNo.Tank2);
+                GetComponent<BankBehaviour>().Gold -= 160;
+                GetComponent<BankBehaviour>().IncomeAmount += 80;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            if (GetComponent<BankBehaviour>().Gold >= 240)
+            {
+
+                CreepController.SpawnCreep(this.id, CreepNo.Tank3);
+                GetComponent<BankBehaviour>().Gold -= 240;
+                GetComponent<BankBehaviour>().IncomeAmount += 120;
             }
         }
     }

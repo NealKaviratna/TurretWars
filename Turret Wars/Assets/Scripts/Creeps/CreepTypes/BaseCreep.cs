@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class SimpleCreep : Poolable {
+public class BaseCreep : Poolable {
 
     #region Creep
     public BoxCollider spawnzone;
@@ -12,11 +12,10 @@ public class SimpleCreep : Poolable {
     private uint creepId;
     
     public float hp = 100.0f;
-    public float speed = 0.1f;
+    public float speed = 0.07f;
     public int value = 10;
 
     private bool inUse = false;
-    private CreepNo creepNo = CreepNo.SimpleCreep;
 
     private CreepController controller;
     #endregion
@@ -62,7 +61,16 @@ public class SimpleCreep : Poolable {
 
     public override string ToString()
     {
-        return "SimpleCreep";
+        return "BaseCreep";
+    }
+
+    public virtual void SetLevel(int level)
+    {
+        this.maxHp = 100.0f;
+
+        this.hp = this.maxHp;
+        this.speed = 0.1f * (level / 2.0f);
+        this.value = 10 * level;
     }
     #endregion
 

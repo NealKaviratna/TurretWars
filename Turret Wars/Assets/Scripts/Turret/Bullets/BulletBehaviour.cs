@@ -16,7 +16,7 @@ public abstract class BulletBehaviour : Poolable {
 
     }
 
-    protected void basicDamage(SimpleCreep target, float DamageTimer = 0.0f)
+    protected void basicDamage(BaseCreep target, float DamageTimer = 0.0f)
     {
         target.Die();
     }

@@ -7,10 +7,10 @@ public class BasicBulletBehaviour : BulletBehaviour {
     {
         if (coll.collider.tag == "Enemy")
         {
-            this.basicDamage(coll.gameObject.GetComponent<SimpleCreep>());
+            this.basicDamage(coll.gameObject.GetComponent<BaseCreep>());
             this.Die();
 
-            GameObject.Find("LocalPlayer").GetComponent<BankBehaviour>().Gold += coll.gameObject.GetComponent<SimpleCreep>().value;
+            GameObject.Find("LocalPlayer").GetComponent<BankBehaviour>().Gold += coll.gameObject.GetComponent<BaseCreep>().value;
             GameObject go = Instantiate(Resources.Load("+gold")) as GameObject;
             go.transform.position = this.transform.position;
         }

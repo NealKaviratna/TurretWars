@@ -9,7 +9,8 @@ public class CreepFactory : NetworkBehaviour
 {
 
     #region Object Pool declarations
-    private ObjectPool<SimpleCreep> simpleCreepPool;
+    private ObjectPool<WalkerCreep> walkerCreepPool;
+    private ObjectPool<TankCreep> tankCreepPool;
     #endregion
 
     private Dictionary<uint, Poolable> activeCreeps;
@@ -17,16 +18,38 @@ public class CreepFactory : NetworkBehaviour
     
     public void CreateCreep(CreepNo creepNo, int creator, uint creepId)
     {
+        BaseCreep creep;
         switch (creepNo)
         {
-            case CreepNo.SimpleCreep:
-                var creep = simpleCreepPool.Create(game.GetPlayerByID(creator), creepId, Vector3.zero);
-                activeCreeps.Add(creepId, creep);
-                return;
+            case CreepNo.Walker1:
+                creep = walkerCreepPool.Create(game.GetPlayerByID(creator), creepId, Vector3.zero) as BaseCreep;
+                creep.SetLevel(1);
+                break;
+            case CreepNo.Walker2:
+                creep = walkerCreepPool.Create(game.GetPlayerByID(creator), creepId, Vector3.zero) as BaseCreep;
+                creep.SetLevel(2);
+                break;
+            case CreepNo.Walker3:
+                creep = walkerCreepPool.Create(game.GetPlayerByID(creator), creepId, Vector3.zero) as BaseCreep;
+                creep.SetLevel(3);
+                break;
+            case CreepNo.Tank1:
+                creep = tankCreepPool.Create(game.GetPlayerByID(creator), creepId, Vector3.zero) as BaseCreep;
+                creep.SetLevel(1);
+                break;
+            case CreepNo.Tank2:
+                creep = tankCreepPool.Create(game.GetPlayerByID(creator), creepId, Vector3.zero) as BaseCreep;
+                creep.SetLevel(2);
+                break;
+            case CreepNo.Tank3:
+                creep = tankCreepPool.Create(game.GetPlayerByID(creator), creepId, Vector3.zero) as BaseCreep;
+                creep.SetLevel(3);
+                break;
             default:
                 Debug.Log("Problem creating creep in factory.");
                 return;
         }
+        activeCreeps.Add(creepId, creep);
     }
     
     public void RecallCreep(uint creepId)
@@ -54,9 +77,12 @@ public class CreepFactory : NetworkBehaviour
         this.game = FindObjectOfType<Game>();
 
         var DummyGameObject = Instantiate(Resources.Load("dgo")) as GameObject;
+
         #region Object Pool instantiation
-        simpleCreepPool = new ObjectPool<SimpleCreep>(DummyGameObject);
+        walkerCreepPool = new ObjectPool<WalkerCreep>(DummyGameObject);
+        tankCreepPool = new ObjectPool<TankCreep>(DummyGameObject);
         #endregion
+
         activeCreeps = new Dictionary<uint, Poolable>();
     }
 

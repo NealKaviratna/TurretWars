@@ -21,7 +21,7 @@ public class Nexus : MonoBehaviour
 
     void OnTriggerEnter(Collider coll)
     {
-        var creep = coll.gameObject.GetComponent<SimpleCreep>();
+        var creep = coll.gameObject.GetComponent<BaseCreep>();
         if (creep != null)
         {
             Lives--;
