@@ -2,6 +2,9 @@
 using System.Collections;
 using UnityEngine.UI;
 
+/// <summary>
+/// The thing the player is trying to stop creeps from reaching.
+/// </summary>
 public class Nexus : MonoBehaviour
 {
 

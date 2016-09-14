@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Container for information about a given players playing space.
+/// </summary>
 public class Battlezone : MonoBehaviour {
 
     public BoxCollider creepSpawner;

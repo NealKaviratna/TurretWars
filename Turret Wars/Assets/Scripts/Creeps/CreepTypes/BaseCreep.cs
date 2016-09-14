@@ -2,6 +2,10 @@
 using System.Collections;
 using System;
 
+/// <summary>
+/// Base Class for creeps. Inherit from this and adjust Creep region as necessary.
+/// <see cref="WalkerCreep"/> for an example. Override Update loop for different movement.
+/// </summary>
 public class BaseCreep : Poolable {
 
     #region Creep

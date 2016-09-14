@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// SandBox class for bullets. All bullets should inherit from this.
+/// Use protected methods to create desired behaviour.
+/// </summary>
 public abstract class BulletBehaviour : Poolable {
 
     public GameObject Target;

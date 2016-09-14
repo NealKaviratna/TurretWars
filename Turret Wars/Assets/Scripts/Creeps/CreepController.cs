@@ -3,7 +3,9 @@ using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
 
-// Contains Networking for Creep system
+/// <summary>
+/// Networking code for Creep system
+/// </summary>
 public class CreepController : NetworkBehaviour
 {
 

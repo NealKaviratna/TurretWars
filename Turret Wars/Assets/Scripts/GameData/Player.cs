@@ -2,6 +2,9 @@
 using System.Collections;
 using UnityEngine.Networking;
 
+/// <summary>
+/// Player class. Contains player data as well as creep summoning input handling.
+/// </summary>
 public class Player : NetworkBehaviour
 {
 

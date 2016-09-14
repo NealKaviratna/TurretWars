@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.Networking;
 
 /// <summary>
-/// 
+/// Script for looking around with turret.
 /// </summary>
 /// <remarks> Grabbed from: http://wiki.unity3d.com/index.php/SmoothMouseLook Authored by asteins. </remarks>
 public class SmoothMouseLook : NetworkBehaviour

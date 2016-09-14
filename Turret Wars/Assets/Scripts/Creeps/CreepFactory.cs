@@ -4,7 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
 
-// Local code for creep system
+/// <summary>
+/// Local code for Creep System
+/// </summary>
 public class CreepFactory : NetworkBehaviour
 {
 

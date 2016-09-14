@@ -3,9 +3,11 @@ using System.Collections;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class for handling player income and gold. Attached to Player GameObject.
+/// </summary>
 public class BankBehaviour : NetworkBehaviour
 {
-    [SerializeField]
     private float incomeTimer;
     private float incomeCycleLength = 10.0f;
 

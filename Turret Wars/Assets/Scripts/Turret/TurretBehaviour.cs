@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Will eventually be used to manage the Weapons system for each player.
+/// </summary>
 public class TurretBehaviour : MonoBehaviour
 {
 

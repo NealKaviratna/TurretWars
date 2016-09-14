@@ -18,7 +18,7 @@ public class BasicMachineGun : Weapon
         var DummyGameObject = Instantiate(Resources.Load("dgo")) as GameObject;
         bulletPool = new ObjectPool<BasicBulletBehaviour>(DummyGameObject);
     }
-
+    
     public override void Fire()
     {
         RaycastHit hitInfo; ;
