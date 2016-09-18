@@ -39,7 +39,7 @@ public class TankCreep : BaseCreep
         this.value = 15 * level;
 
         Color[] colors = { Color.green, Color.yellow, Color.red };
-        GetComponent<Renderer>().material.color = colors[level - 1];
+        GetComponentInChildren<Renderer>().material.color = colors[level - 1];
     }
     #endregion
 }
