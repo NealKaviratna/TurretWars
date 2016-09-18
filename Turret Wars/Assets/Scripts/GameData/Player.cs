@@ -63,7 +63,7 @@ public class Player : NetworkBehaviour
         if (!isLocalPlayer) return;
 
         // TODO: make this cleaner
-        if (Input.GetKeyDown(KeyCode.Keypad7))
+        if (Input.GetKeyDown(KeyCode.Keypad7) || Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (GetComponent<BankBehaviour>().Gold >= 50)
             {
@@ -73,7 +73,7 @@ public class Player : NetworkBehaviour
                 GetComponent<BankBehaviour>().IncomeAmount += 25;
             }
         }
-        if (Input.GetKeyDown(KeyCode.Keypad4))
+        if (Input.GetKeyDown(KeyCode.Keypad4) || Input.GetKeyDown(KeyCode.Alpha2))
         {
             if (GetComponent<BankBehaviour>().Gold >= 100)
             {
@@ -83,7 +83,7 @@ public class Player : NetworkBehaviour
                 GetComponent<BankBehaviour>().IncomeAmount += 50;
             }
         }
-        if (Input.GetKeyDown(KeyCode.Keypad1))
+        if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha3))
         {
             if (GetComponent<BankBehaviour>().Gold >= 150)
             {
@@ -93,7 +93,7 @@ public class Player : NetworkBehaviour
                 GetComponent<BankBehaviour>().IncomeAmount += 50;
             }
         }
-        if (Input.GetKeyDown(KeyCode.Keypad8))
+        if (Input.GetKeyDown(KeyCode.Keypad8) || Input.GetKeyDown(KeyCode.Alpha4))
         {
             if (GetComponent<BankBehaviour>().Gold >= 80)
             {
@@ -103,7 +103,7 @@ public class Player : NetworkBehaviour
                 GetComponent<BankBehaviour>().IncomeAmount += 40;
             }
         }
-        if (Input.GetKeyDown(KeyCode.Keypad5))
+        if (Input.GetKeyDown(KeyCode.Keypad5) || Input.GetKeyDown(KeyCode.Alpha5))
         {
             if (GetComponent<BankBehaviour>().Gold >= 160)
             {
@@ -113,7 +113,7 @@ public class Player : NetworkBehaviour
                 GetComponent<BankBehaviour>().IncomeAmount += 80;
             }
         }
-        if (Input.GetKeyDown(KeyCode.Keypad2))
+        if (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha6))
         {
             if (GetComponent<BankBehaviour>().Gold >= 240)
             {
