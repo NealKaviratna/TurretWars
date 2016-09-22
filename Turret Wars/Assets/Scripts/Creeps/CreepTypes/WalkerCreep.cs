@@ -5,16 +5,6 @@ using System;
 public class WalkerCreep : BaseCreep
 {
 
-    #region Creep
-
-    private float maxHp = 100.0f;
-    private uint creepId;
-
-    public new float hp = 100.0f;
-    public new float speed = 0.07f;
-    public new int value = 10;
-    #endregion
-
     #region IPoolable overrides
     /// <summary>
     /// Determines what prefab will be associated with this script.

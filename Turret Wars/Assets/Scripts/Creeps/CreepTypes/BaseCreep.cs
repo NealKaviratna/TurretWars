@@ -12,7 +12,7 @@ public class BaseCreep : Poolable {
     public BoxCollider spawnzone;
     public Transform target;
 
-    private float maxHp = 100.0f;
+    protected float maxHp = 100.0f;
     private uint creepId;
     
     public float hp = 100.0f;

@@ -5,16 +5,6 @@ using System;
 public class TankCreep : BaseCreep
 {
 
-    #region Creep
-
-    private float maxHp = 300.0f;
-    private uint creepId;
-
-    public new float hp = 300.0f;
-    public new float speed = 0.025f;
-    public new int value = 15;
-    #endregion
-
     #region IPoolable overrides
     /// <summary>
     /// Determines what prefab will be associated with this script.
