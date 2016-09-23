@@ -25,7 +25,7 @@ public class WalkerCreep : BaseCreep
         this.maxHp = 100.0f * (level / 4.0f);
 
         this.hp = this.maxHp;
-        this.speed = 0.5f * (level * 2);
+        this.speed = 0.5f * (level);
         this.value = 10 * level;
 
 
