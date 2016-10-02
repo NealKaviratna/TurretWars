@@ -23,9 +23,9 @@ public class FlyingCreep : BaseCreep {
 		Debug.Log (level);
 		this.maxHp = 50.0f;
 
-		this.hp = this.maxHp;
-		this.speed = 2.0f * (level / 2.0f);
-		this.value = 10 * level;
+		this.Hp = this.maxHp;
+		this.Speed = 2.0f * (level / 2.0f);
+		this.Value = 10 * level;
 	}
 	#endregion
 }

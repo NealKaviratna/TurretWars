@@ -10,6 +10,8 @@ public class BasicMachineGun : Weapon
 
     private ObjectPool<BasicBulletBehaviour> bulletPool;
 
+    private EffectBehaviour effect;
+
     // Use this for initialization
     void Start()
     {
@@ -29,6 +31,10 @@ public class BasicMachineGun : Weapon
             b.TargetPos = hitInfo.point;
             b.Target = hitInfo.transform.gameObject;
         }
+
+        if (this.effect != null)
+            b.Effect = this.effect;
+
         b.Fire();
     }
 
@@ -37,5 +43,23 @@ public class BasicMachineGun : Weapon
         if (!gameObject.transform.parent.gameObject.GetComponent<NetworkIdentity>().isLocalPlayer) return;
         if (Input.GetKeyDown(KeyCode.Mouse0))
             Fire();
+        if (Input.GetKeyDown(KeyCode.U))
+            LevelUp();
+    }
+
+    public void LevelUp()
+    {
+        switch (this.level++)
+        {
+            case 0:
+                this.fireRate += 0.5f;
+                break;
+            case 1:
+                this.effect = gameObject.AddComponent<FrostEffectBehaviour>();
+                break;
+            default:
+                this.fireRate += 0.5f;
+                break;
+        }
     }
 }
