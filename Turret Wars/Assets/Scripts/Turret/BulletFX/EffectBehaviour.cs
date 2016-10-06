@@ -7,6 +7,12 @@ public abstract class EffectBehaviour : MonoBehaviour
     public float Duration = 5.0f;
 
     protected float timer;
+    protected Color color;
+
+    public bool hasColor
+    {
+        get { return color != null; }
+    }
 
     protected virtual void Start()
     {
@@ -33,4 +39,10 @@ public abstract class EffectBehaviour : MonoBehaviour
 
     abstract public override string ToString();
     #endregion
+
+    public void SetTargetColor(GameObject target)
+    {
+        if (this.hasColor && target.GetComponentInChildren<Renderer>())
+            target.GetComponentInChildren<Renderer>().material.color = this.color;
+    }
 }

@@ -39,7 +39,11 @@ public class BasicMachineGun : Weapon
         }
 
         if (this.effect != null)
+        {
             b.Effect = this.effect;
+            if (this.effect.hasColor)
+                this.effect.SetTargetColor(b.gameObject);
+        }
 
         b.Fire();
     }

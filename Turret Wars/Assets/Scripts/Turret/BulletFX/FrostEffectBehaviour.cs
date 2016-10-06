@@ -3,6 +3,12 @@ using System.Collections;
 
 public class FrostEffectBehaviour : EffectBehaviour
 {
+    protected override void Start()
+    {
+        base.Start();
+        this.color = Color.cyan;
+    }
+
     #region Effect
 
     public float SlowAmount = 0.9f;
