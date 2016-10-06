@@ -26,8 +26,17 @@ public abstract class BulletBehaviour : Poolable
 
     protected void basicDamage(BaseCreep target, float DamageTimer = 0.0f)
     {
-        Debug.Log(target.Hp);
         target.Hp -= this.damageAmount;
+
+
+        // This feels a bit hacky, but it works and I can't think of a situation where it would break anything.
+        if (target.Hp < 0)
+        {
+            target.Die();
+            GameObject.Find("LocalPlayer").GetComponent<BankBehaviour>().Gold += target.Value;
+            GameObject go = Instantiate(Resources.Load("+gold")) as GameObject;
+            go.transform.position = this.transform.position;
+        }
         if (this.Effect != null)
             this.AddEffect(target.gameObject);
     }

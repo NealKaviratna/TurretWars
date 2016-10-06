@@ -32,7 +32,6 @@ public class BasicMachineGun : Weapon
         if (Physics.Raycast(MuzzleTrans.position, this.transform.forward, out hitInfo))
         {
             b.TargetPos = hitInfo.point;
-            b.Target = hitInfo.transform.gameObject;
         }
 
         if (this.effect != null)
