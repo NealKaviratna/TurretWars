@@ -33,6 +33,10 @@ public class BasicMachineGun : Weapon
         {
             b.TargetPos = hitInfo.point;
         }
+        else
+        {
+            b.TargetPos = MuzzleTrans.position + this.transform.parent.forward;
+        }
 
         if (this.effect != null)
             b.Effect = this.effect;
