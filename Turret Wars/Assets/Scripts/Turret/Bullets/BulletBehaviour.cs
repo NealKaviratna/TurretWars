@@ -5,15 +5,19 @@ using System.Collections;
 /// SandBox class for bullets. All bullets should inherit from this.
 /// Use protected methods to create desired behaviour.
 /// </summary>
-public abstract class BulletBehaviour : Poolable {
+public abstract class BulletBehaviour : Poolable
+{
 
     public GameObject Target;
     public Vector3 TargetPos;
     public TrailRenderer TrailRenderer;
+    public EffectBehaviour Effect;
 
     protected float speed = 100.0f;
     protected bool isHoming = false;
     protected bool inUse = false;
+
+    protected float damageAmount = 10.0f;
 
     protected void aoeDamage(float DamageBoxDuration = 0.0f, float DamageTimer = 0.0f)
     {
@@ -22,7 +26,31 @@ public abstract class BulletBehaviour : Poolable {
 
     protected void basicDamage(BaseCreep target, float DamageTimer = 0.0f)
     {
-        target.Die();
+        target.Hp -= this.damageAmount;
+
+
+        // This feels a bit hacky, but it works and I can't think of a situation where it would break anything.
+        if (target.Hp < 0)
+        {
+            target.Die();
+            GameObject.Find("LocalPlayer").GetComponent<BankBehaviour>().Gold += target.Value;
+            GameObject go = Instantiate(Resources.Load("+gold")) as GameObject;
+            go.transform.position = this.transform.position;
+        }
+        if (this.Effect != null)
+            this.AddEffect(target.gameObject);
+    }
+
+    private void AddEffect(GameObject target)
+    {
+        switch (Effect.ToString())
+        {
+            case "FrostEffectBehaviour":
+                target.AddComponent<FrostEffectBehaviour>();
+                break;
+            default:
+                break;
+        }
     }
 
     private void playParticles()
@@ -35,20 +63,23 @@ public abstract class BulletBehaviour : Poolable {
 
     }
 
-    public virtual void Fire() {
+    public virtual void Fire()
+    {
         if (TrailRenderer != null) TrailRenderer.enabled = true;
         if (TargetPos != null) transform.LookAt(TargetPos);
         GetComponent<Rigidbody>().velocity = speed * transform.forward;
     }
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         this.Recall();
     }
-	
-	// Update is called once per frame
-	void Update () {
-	    if (this.isHoming)
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (this.isHoming)
             if (Target != null) transform.LookAt(Target.transform.position);
         if (GetComponent<Rigidbody>().velocity.magnitude < 5.0f)
             this.Die();

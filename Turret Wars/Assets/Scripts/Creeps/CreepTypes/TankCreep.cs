@@ -24,9 +24,9 @@ public class TankCreep : BaseCreep
     {
         this.maxHp = 300.0f * (level / 4.0f);
 
-        this.hp = this.maxHp;
-        this.speed = 0.025f * (level);
-        this.value = 15 * level;
+        this.Hp = this.maxHp;
+        this.Speed = 0.025f * (level);
+        this.Value = 15 * level;
 
         Color[] colors = { Color.green, Color.yellow, Color.red };
         GetComponentInChildren<Renderer>().material.color = colors[level - 1];
