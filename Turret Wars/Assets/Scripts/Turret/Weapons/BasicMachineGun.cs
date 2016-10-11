@@ -29,7 +29,7 @@ public class BasicMachineGun : Weapon
         RaycastHit hitInfo; ;
 
         BulletBehaviour b = bulletPool.Create(Player, 0, MuzzleTrans.position) as BulletBehaviour;
-        if (Physics.Raycast(MuzzleTrans.position, this.transform.forward, out hitInfo))
+        if (Physics.Raycast(Player.transform.position, Player.transform.forward, out hitInfo))
         {
             b.TargetPos = hitInfo.point;
         }
