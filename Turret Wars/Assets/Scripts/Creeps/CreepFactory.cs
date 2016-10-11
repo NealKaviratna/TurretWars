@@ -13,6 +13,7 @@ public class CreepFactory : NetworkBehaviour
     #region Object Pool declarations
     private ObjectPool<WalkerCreep> walkerCreepPool;
     private ObjectPool<TankCreep> tankCreepPool;
+    private ObjectPool<FlankCreep> flankCreepPool;
     #endregion
 
     private Dictionary<uint, Poolable> activeCreeps;
@@ -45,6 +46,18 @@ public class CreepFactory : NetworkBehaviour
                 break;
             case CreepNo.Tank3:
                 creep = tankCreepPool.Create(game.GetPlayerByID(creator), creepId, Vector3.zero) as BaseCreep;
+                creep.SetLevel(3);
+                break;
+            case CreepNo.Flank1:
+                creep = flankCreepPool.Create(game.GetPlayerByID(creator), creepId, Vector3.zero) as BaseCreep;
+                creep.SetLevel(1);
+                break;
+            case CreepNo.Flank2:
+                creep = flankCreepPool.Create(game.GetPlayerByID(creator), creepId, Vector3.zero) as BaseCreep;
+                creep.SetLevel(2);
+                break;
+            case CreepNo.Flank3:
+                creep = flankCreepPool.Create(game.GetPlayerByID(creator), creepId, Vector3.zero) as BaseCreep;
                 creep.SetLevel(3);
                 break;
             default:
@@ -83,6 +96,7 @@ public class CreepFactory : NetworkBehaviour
         #region Object Pool instantiation
         walkerCreepPool = new ObjectPool<WalkerCreep>(DummyGameObject);
         tankCreepPool = new ObjectPool<TankCreep>(DummyGameObject);
+        flankCreepPool = new ObjectPool<FlankCreep>(DummyGameObject);
         #endregion
 
         activeCreeps = new Dictionary<uint, Poolable>();
