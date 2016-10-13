@@ -30,13 +30,6 @@ public abstract class BulletBehaviour : Poolable
 
 
         // This feels a bit hacky, but it works and I can't think of a situation where it would break anything.
-        if (target.Hp < 0)
-        {
-            target.Die();
-            GameObject.Find("LocalPlayer").GetComponent<BankBehaviour>().Gold += target.Value;
-            GameObject go = Instantiate(Resources.Load("+gold")) as GameObject;
-            go.transform.position = this.transform.position;
-        }
         if (this.Effect != null)
             this.AddEffect(target.gameObject);
     }
@@ -110,6 +103,10 @@ public abstract class BulletBehaviour : Poolable
 
     public override void Die()
     {
+        TrailRenderer tr = GetComponentInChildren<TrailRenderer>();
+        if (tr != null)
+            tr.Clear();
+
         this.inUse = false;
         this.gameObject.SetActive(false);
     }

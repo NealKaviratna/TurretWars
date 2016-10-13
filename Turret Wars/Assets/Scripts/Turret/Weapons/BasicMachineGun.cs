@@ -19,7 +19,7 @@ public class BasicMachineGun : Weapon
     {
         this.level = 0;
         this.fireRate = 0.1f;
-        this.timer = 0.0f;
+        this.timer = this.fireRate;
         var DummyGameObject = Instantiate(Resources.Load("dgo")) as GameObject;
         bulletPool = new ObjectPool<BasicBulletBehaviour>(DummyGameObject);
     }

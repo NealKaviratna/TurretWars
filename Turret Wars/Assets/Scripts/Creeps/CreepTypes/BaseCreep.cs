@@ -87,6 +87,14 @@ public class BaseCreep : Poolable {
     // Update is called once per frame
     void Update()
     {
+        if (this.Hp < 0)
+        {
+            this.Die();
+            GameObject.Find("LocalPlayer").GetComponent<BankBehaviour>().Gold += this.Value;
+            GameObject go = Instantiate(Resources.Load("+gold")) as GameObject;
+            go.transform.position = this.transform.position;
+        }
+
         transform.position = Vector3.MoveTowards(transform.position, target.position, Speed);
     }
     #endregion
