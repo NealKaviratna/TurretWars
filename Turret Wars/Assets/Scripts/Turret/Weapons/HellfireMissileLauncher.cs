@@ -20,8 +20,8 @@ public class HellfireMissileLauncher : Weapon
     void Start()
     {
         this.level = 0;
-        this.fireRate = 5.0f;
-        this.timer = 0.0f;
+        this.fireRate = 3.0f;
+        this.timer = this.fireRate;
         var DummyGameObject = Instantiate(Resources.Load("dgo")) as GameObject;
         missilePool = new ObjectPool<HellfireMissileBehaviour>(DummyGameObject);
     }
@@ -40,7 +40,8 @@ public class HellfireMissileLauncher : Weapon
         {
             foreach (HellfireMissileBehaviour missile in missiles)
             {
-                missile.TargetPos = this.MuzzleTrans.position + Vector3.Project(this.Player.transform.forward,new Vector3(0, 0, 0));
+                Quaternion rotation = Quaternion.Euler(Random.Range(-30, -60), Random.Range(-15, 15), 0);
+                missile.TargetPos = this.MuzzleTrans.position + (rotation * Player.transform.forward);
                 missile.Target = hitInfo.collider.gameObject;
             }
         }

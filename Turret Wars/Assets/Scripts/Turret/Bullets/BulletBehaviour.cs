@@ -15,6 +15,7 @@ public abstract class BulletBehaviour : Poolable
 
     protected float speed = 100.0f;
     protected bool isHoming = false;
+    protected float turnSpeed = 0.1f;
     protected bool inUse = false;
 
     protected float damageAmount = 10.0f;
@@ -75,10 +76,15 @@ public abstract class BulletBehaviour : Poolable
         GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         if (this.isHoming)
         {
-            if (Target != null) transform.LookAt(Target.transform.position);
+            if (Target != null)
+            {
+                Vector3 direction = Target.transform.position - transform.position;
+                Quaternion targetRotation = Quaternion.FromToRotation(transform.forward, direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed);
+            }
             GetComponent<Rigidbody>().velocity = speed * transform.forward;
         }
-        if (GetComponent<Rigidbody>().velocity.magnitude < 5.0f)
+        if (GetComponent<Rigidbody>().velocity.magnitude < 0.0f)
             this.Die();
     }
 

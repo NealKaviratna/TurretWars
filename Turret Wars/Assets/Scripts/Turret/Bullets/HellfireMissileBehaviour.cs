@@ -9,13 +9,12 @@ public class HellfireMissileBehaviour : BulletBehaviour {
     public void Start()
     {
         this.Recall();
-        this.speed = 5.0f;
+        this.speed = 50.0f;
+        this.isHoming = true;
     }
 
     void OnCollisionEnter(Collision coll)
     {
-        print(coll.collider);
-        print(coll.collider.tag);
         if (coll.collider.tag == "Enemy")
         {
             this.basicDamage(coll.gameObject.GetComponent<BaseCreep>());
@@ -24,7 +23,6 @@ public class HellfireMissileBehaviour : BulletBehaviour {
         else if (coll.collider.tag != "Player")
         {
             this.Die();
-            Debug.Log("hdj");
         }
     }
 
