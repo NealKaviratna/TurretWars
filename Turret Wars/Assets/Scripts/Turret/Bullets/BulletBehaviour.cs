@@ -79,8 +79,12 @@ public abstract class BulletBehaviour : Poolable
     // Update is called once per frame
     void Update()
     {
+        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         if (this.isHoming)
+        {
             if (Target != null) transform.LookAt(Target.transform.position);
+            GetComponent<Rigidbody>().velocity = speed * transform.forward;
+        }
         if (GetComponent<Rigidbody>().velocity.magnitude < 5.0f)
             this.Die();
     }
