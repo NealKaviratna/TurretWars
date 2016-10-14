@@ -12,12 +12,10 @@ public class SuperShotgun : Weapon
 
     private ObjectPool<ShotgunPelletBehaviour> bulletPool;
 
-    private EffectBehaviour effect;
-
     private float timer;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         this.level = 0;
         this.fireRate = 0.5f;
@@ -93,7 +91,7 @@ public class SuperShotgun : Weapon
                 this.fireRate -= 0.1f;
                 break;
             case 1:
-                this.effect = gameObject.AddComponent<FrostEffectBehaviour>();
+                this.effect = gameObject.AddComponent<FireEffectBehaviour>();
                 break;
             default:
                 this.fireRate -= 0.1f;

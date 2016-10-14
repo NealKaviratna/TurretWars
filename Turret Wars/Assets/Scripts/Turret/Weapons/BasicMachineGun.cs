@@ -10,12 +10,10 @@ public class BasicMachineGun : Weapon
 
     private ObjectPool<BasicBulletBehaviour> bulletPool;
 
-    private EffectBehaviour effect;
-
     private float timer;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         this.level = 0;
         this.fireRate = 0.1f;

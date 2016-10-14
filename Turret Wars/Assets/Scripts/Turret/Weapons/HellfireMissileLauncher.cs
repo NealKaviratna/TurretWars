@@ -12,12 +12,10 @@ public class HellfireMissileLauncher : Weapon
 
     private ObjectPool<HellfireMissileBehaviour> missilePool;
 
-    private EffectBehaviour effect;
-
     private float timer;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         this.level = 0;
         this.fireRate = 3.0f;

@@ -8,9 +8,9 @@ public class HellfireMissileBehaviour : BulletBehaviour {
 
     public void Start()
     {
-        this.Recall();
         this.speed = 50.0f;
         this.isHoming = true;
+        this.Recall();
     }
 
     void OnCollisionEnter(Collision coll)

@@ -29,8 +29,6 @@ public abstract class BulletBehaviour : Poolable
     {
         target.Hp -= this.damageAmount;
 
-
-        // This feels a bit hacky, but it works and I can't think of a situation where it would break anything.
         if (this.Effect != null)
             this.AddEffect(target.gameObject);
     }
@@ -41,6 +39,9 @@ public abstract class BulletBehaviour : Poolable
         {
             case "FrostEffectBehaviour":
                 target.AddComponent<FrostEffectBehaviour>();
+                break;
+            case "FireEffectBehaviour":
+                target.AddComponent<FireEffectBehaviour>();
                 break;
             default:
                 break;
