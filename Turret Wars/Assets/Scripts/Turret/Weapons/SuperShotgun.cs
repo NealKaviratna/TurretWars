@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.Networking;
 
@@ -20,8 +21,15 @@ public class SuperShotgun : Weapon
         this.level = 0;
         this.fireRate = 0.5f;
         this.timer = this.fireRate;
+
         var DummyGameObject = Instantiate(Resources.Load("dgo")) as GameObject;
         bulletPool = new ObjectPool<ShotgunPelletBehaviour>(DummyGameObject);
+
+        this.upgradeIcon = GameObject.Find("UI:SuperShotgun").transform.GetChild(0).GetComponent<Image>();
+        this.upgradeSprites = new System.Collections.Generic.Queue<Sprite>();
+        this.upgradeSprites.Enqueue(Resources.Load("normalUpgrade") as Sprite);
+        this.upgradeSprites.Enqueue(Resources.Load("ElementalUpgrade") as Sprite);
+        this.upgradeSprites.Enqueue(Resources.Load("normalUpgrade") as Sprite);
     }
 
     public override void Fire()
@@ -83,7 +91,7 @@ public class SuperShotgun : Weapon
             LevelUp();
     }
 
-    public void LevelUp()
+    public override void LevelUp()
     {
         switch (this.level++)
         {
@@ -97,5 +105,6 @@ public class SuperShotgun : Weapon
                 this.fireRate -= 0.1f;
                 break;
         }
+        base.LevelUp();
     }
 }

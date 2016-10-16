@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class BasicMachineGun : Weapon
@@ -18,8 +19,15 @@ public class BasicMachineGun : Weapon
         this.level = 0;
         this.fireRate = 0.1f;
         this.timer = this.fireRate;
+
         var DummyGameObject = Instantiate(Resources.Load("dgo")) as GameObject;
         bulletPool = new ObjectPool<BasicBulletBehaviour>(DummyGameObject);
+
+        this.upgradeIcon = GameObject.Find("UI:MachineGun").transform.GetChild(0).GetComponent<Image>();
+        this.upgradeSprites = new System.Collections.Generic.Queue<Sprite>();
+        this.upgradeSprites.Enqueue(Resources.Load("normalUpgrade") as Sprite);
+        this.upgradeSprites.Enqueue(Resources.Load("ElementalUpgrade") as Sprite);
+        this.upgradeSprites.Enqueue(Resources.Load("normalUpgrade") as Sprite);
     }
     
     public override void Fire()
@@ -60,7 +68,7 @@ public class BasicMachineGun : Weapon
             LevelUp();
     }
 
-    public void LevelUp()
+    public override void LevelUp()
     {
         switch (this.level++)
         {
@@ -74,5 +82,6 @@ public class BasicMachineGun : Weapon
                 this.fireRate -= 0.1f;
                 break;
         }
+        base.LevelUp();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.Networking;
 
@@ -20,8 +21,15 @@ public class HellfireMissileLauncher : Weapon
         this.level = 0;
         this.fireRate = 3.0f;
         this.timer = this.fireRate;
+
         var DummyGameObject = Instantiate(Resources.Load("dgo")) as GameObject;
         missilePool = new ObjectPool<HellfireMissileBehaviour>(DummyGameObject);
+
+        this.upgradeIcon = GameObject.Find("UI:HellfireMissileLauncher").transform.GetChild(0).GetComponent<Image>();
+        this.upgradeSprites = new System.Collections.Generic.Queue<Sprite>();
+        this.upgradeSprites.Enqueue(Resources.Load("normalUpgrade") as Sprite);
+        this.upgradeSprites.Enqueue(Resources.Load("ElementalUpgrade") as Sprite);
+        this.upgradeSprites.Enqueue(Resources.Load("normalUpgrade") as Sprite);
     }
     
     public override void Fire()
@@ -80,7 +88,7 @@ public class HellfireMissileLauncher : Weapon
             LevelUp();
     }
 
-    public void LevelUp()
+    public override void LevelUp()
     {
         switch (this.level++)
         {
@@ -88,11 +96,12 @@ public class HellfireMissileLauncher : Weapon
                 this.fireRate -= 0.1f;
                 break;
             case 1:
-                this.effect = gameObject.AddComponent<FrostEffectBehaviour>();
+                this.effect = gameObject.AddComponent<LightningEffectBehaviour>();
                 break;
             default:
                 this.fireRate -= 0.1f;
                 break;
         }
+        base.LevelUp();
     }
 }

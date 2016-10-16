@@ -11,7 +11,7 @@ public abstract class EffectBehaviour : MonoBehaviour
 
     public bool hasColor
     {
-        get { return color != null; }
+        get { return this.color != null; }
     }
 
     protected virtual void Start()

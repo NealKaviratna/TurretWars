@@ -28,6 +28,11 @@ public class Player : NetworkBehaviour
     public Battlezone Battlezone
     {
         get { return battlezone; }
+        set
+        {
+            this.battlezone = value;
+            this.battlezone.Nexus.GetComponent<Nexus>().Player = this;
+        }
     }
 
     public Battlezone TargetBattlezone

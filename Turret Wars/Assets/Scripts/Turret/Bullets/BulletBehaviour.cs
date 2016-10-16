@@ -68,13 +68,13 @@ public abstract class BulletBehaviour : Poolable
     // Use this for initialization
     void Start()
     {
+        this.GetComponent<Rigidbody>().freezeRotation = true;
         this.Recall();
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         if (this.isHoming)
         {
             if (Target != null)

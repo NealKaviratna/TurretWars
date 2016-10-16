@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 /// <summary>
@@ -9,6 +10,7 @@ public class Nexus : MonoBehaviour
 {
 
     public int Lives;
+    public Player Player;
 
     // Use this for initialization
     void Start()
@@ -25,7 +27,7 @@ public class Nexus : MonoBehaviour
     void OnTriggerEnter(Collider coll)
     {
         var creep = coll.gameObject.GetComponent<BaseCreep>();
-        if (creep != null)
+        if (creep != null && Player.isLocalPlayer)
         {
             Lives--;
             GameObject.Find("UI:Lives").GetComponent<Text>().text = "Lives: " + Lives.ToString();
