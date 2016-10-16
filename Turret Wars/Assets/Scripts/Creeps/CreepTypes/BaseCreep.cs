@@ -42,6 +42,7 @@ public class BaseCreep : Poolable {
         this.creepId = creepId;
 
         transform.position = Util.GetPointInCollider(creator.TargetBattlezone.CreepSpawner);
+        transform.LookAt(this.target);
         this.Hp = maxHp;
         this.gameObject.SetActive(true);
         this.inUse = true;

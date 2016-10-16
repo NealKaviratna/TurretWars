@@ -136,7 +136,7 @@ public class Player : NetworkBehaviour
             {
 
                 CreepController.SpawnCreep(this.id, CreepNo.Flank1);
-                GetComponent<BankBehaviour>().Gold -= 80;
+                GetComponent<BankBehaviour>().Gold += 80;
                 GetComponent<BankBehaviour>().IncomeAmount += 40;
             }
         }

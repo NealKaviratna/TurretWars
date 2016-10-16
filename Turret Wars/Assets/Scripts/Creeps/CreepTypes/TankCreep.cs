@@ -29,7 +29,8 @@ public class TankCreep : BaseCreep
         this.Value = 15 * level;
 
         Color[] colors = { Color.green, Color.yellow, Color.red };
-        GetComponentInChildren<Renderer>().material.color = colors[level - 1];
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+            r.material.SetColor("_GridColour", colors[level - 1]);
     }
     #endregion
 }

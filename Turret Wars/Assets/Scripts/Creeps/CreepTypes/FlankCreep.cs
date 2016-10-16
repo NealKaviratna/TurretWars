@@ -52,7 +52,7 @@ class FlankCreep : BaseCreep
 
 
         Color[] colors = { Color.green, Color.yellow, Color.red };
-        GetComponentInChildren<Renderer>().material.color = colors[level - 1];
+        GetComponentInChildren<Renderer>().material.SetColor("_GridColour", colors[level - 1]);
     }
     #endregion
 
