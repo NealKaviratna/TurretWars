@@ -21,7 +21,18 @@ public class Nexus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        // End Game Check
+        if (this.Lives <= 0)
+        {
+            if (Player.isLocalPlayer)
+            {
+                Debug.Log("You Win");
+            }
+            else
+            {
+                Debug.Log("You Win");
+            }
+        }
     }
 
     void OnTriggerEnter(Collider coll)
