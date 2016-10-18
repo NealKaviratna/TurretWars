@@ -16,7 +16,7 @@ public class SuperShotgun : Weapon
     private float timer;
 
     // Use this for initialization
-    void Awake()
+    protected override void Awake()
     {
         this.level = 0;
         this.fireRate = 0.5f;
@@ -75,6 +75,7 @@ public class SuperShotgun : Weapon
         {
             bul.Fire();
         }
+        base.Fire();
     }
 
     public void Update()

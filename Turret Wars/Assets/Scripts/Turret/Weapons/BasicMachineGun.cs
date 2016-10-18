@@ -14,7 +14,7 @@ public class BasicMachineGun : Weapon
     private float timer;
 
     // Use this for initialization
-    void Awake()
+    protected override void Awake()
     {
         this.level = 0;
         this.fireRate = 0.1f;
@@ -52,6 +52,7 @@ public class BasicMachineGun : Weapon
         }
 
         b.Fire();
+        base.Fire();
     }
 
     public void Update()
