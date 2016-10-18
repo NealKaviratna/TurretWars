@@ -50,7 +50,7 @@
 		vertexOutput output;
 		// Calculate the world position coordinates to pass to the fragment shader
 		output.pos = mul(UNITY_MATRIX_MVP,input.vertex);
-		output.worldPos = mul(_Object2World, input.vertex);
+		output.worldPos = input.vertex;
 		return output;
 	}
 

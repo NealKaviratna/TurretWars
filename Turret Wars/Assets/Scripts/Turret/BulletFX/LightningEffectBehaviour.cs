@@ -20,7 +20,7 @@ public class LightningEffectBehaviour : EffectBehaviour
             Destroy(this);
 
         this.originalSpeed = GetComponent<BaseCreep>().Speed;
-        GetComponent<BaseCreep>().Speed *= 0;
+        GetComponent<BaseCreep>().Speed = 0;
     }
 
     public override void RemoveEffect()
