@@ -4,28 +4,23 @@ using System.Collections;
 
 public class CameraModifier : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-
-    }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    private bool shaking = false;
 
     public void ShotFiredHandler(object sender, EventArgs e)
     {
+        if (shaking) return;
+
         Weapon weapon = sender as Weapon;
-        CameraShake(weapon.KickBack, 0.1f);
+        StartCoroutine(CameraShake(weapon.RecoilTime, weapon.KickBack));
     }
 
     public IEnumerator CameraShake(float duration, float magnitude)
     {
-
+        shaking = true;
+        Debug.Log("Shaking: " + magnitude.ToString());
         float elapsed = 0.0f;
 
-        Vector3 originalCamPos = Camera.main.transform.position;
+        Vector3 originalCamPos = Camera.main.transform.localPosition;
 
         while (elapsed < duration)
         {
@@ -41,11 +36,12 @@ public class CameraModifier : MonoBehaviour {
             x *= magnitude * damper;
             y *= magnitude * damper;
 
-            Camera.main.transform.position = new Vector3(x, y, originalCamPos.z);
+            Camera.main.transform.localPosition = new Vector3(x, y, originalCamPos.z);
 
             yield return null;
         }
 
-        Camera.main.transform.position = originalCamPos;
+        Camera.main.transform.localPosition = originalCamPos;
+        shaking = false;
     }
 }

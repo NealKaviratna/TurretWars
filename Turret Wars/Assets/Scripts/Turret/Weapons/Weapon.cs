@@ -23,7 +23,15 @@ public class Weapon : MonoBehaviour {
     
     public float KickBack
     {
-        get { return level / fireRate;  }
+        get { return (level+1) * fireRate * .1f;  }
+    }
+
+    /// <summary>
+    /// How long should this weapon shake?
+    /// </summary>
+    public float RecoilTime
+    {
+        get { return fireRate / 2.0f; }
     }
 
     protected virtual void Awake()
@@ -33,7 +41,8 @@ public class Weapon : MonoBehaviour {
 
     public virtual void Fire()
     {
-        ShotFired(this, EventArgs.Empty);
+        if (ShotFired != null)
+            this.ShotFired(this, EventArgs.Empty);
     }
 
     public virtual void LevelUp()

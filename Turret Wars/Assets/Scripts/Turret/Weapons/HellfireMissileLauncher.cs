@@ -30,6 +30,8 @@ public class HellfireMissileLauncher : Weapon
         this.upgradeSprites.Enqueue(Resources.Load("normalUpgrade") as Sprite);
         this.upgradeSprites.Enqueue(Resources.Load("ElementalUpgrade") as Sprite);
         this.upgradeSprites.Enqueue(Resources.Load("normalUpgrade") as Sprite);
+
+        base.Awake();
     }
     
     public override void Fire()
