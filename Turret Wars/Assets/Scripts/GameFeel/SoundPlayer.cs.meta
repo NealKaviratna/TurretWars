@@ -1,11 +1,10 @@
 fileFormatVersion: 2
-guid: ac00c6d86538a4a4c9d74645e8a42c0c
-timeCreated: 1476829821
+guid: e981172784a218646969b140a0a949be
+timeCreated: 1476827463
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences:
-  - ShotSFX: {fileID: 8300000, guid: c56e668b55c6e014cbba0979eb8a2346, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

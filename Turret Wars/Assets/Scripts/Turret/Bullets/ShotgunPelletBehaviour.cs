@@ -6,11 +6,11 @@ using System.Collections;
 /// </summary>
 public class ShotgunPelletBehaviour : BasicBulletBehaviour {
 
-    public void Start()
+    protected override void Start()
     {
         this.speed = 120.0f;
         this.damageAmount = 5.0f;
-        this.Recall();
+        base.Start();
     }
 
     public override string ToString()

@@ -20,7 +20,8 @@ public class Weapon : MonoBehaviour {
 
     protected EffectBehaviour effect;
     public event EventHandler ShotFired;
-    
+    public AudioClip ShotSFX;
+
     public float KickBack
     {
         get { return (level+1) * fireRate * .1f;  }
@@ -37,6 +38,7 @@ public class Weapon : MonoBehaviour {
     protected virtual void Awake()
     {
         this.ShotFired += GameObject.Find("GameFeel").GetComponent<CameraModifier>().ShotFiredHandler;
+        this.ShotFired += GameObject.Find("GameFeel").GetComponent<SoundPlayer>().ShotFiredHandler;
     }
 
     public virtual void Fire()

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 /// <summary>
 /// SandBox class for bullets. All bullets should inherit from this.
@@ -12,13 +13,17 @@ public abstract class BulletBehaviour : Poolable
     public Vector3 TargetPos;
     public TrailRenderer TrailRenderer;
     public EffectBehaviour Effect;
+    public AudioClip HitSFX;
 
     protected float speed = 100.0f;
     protected bool isHoming = false;
     protected float turnSpeed = 0.1f;
     protected bool inUse = false;
 
+    #region Bullet Sandbox
     protected float damageAmount = 10.0f;
+
+    private event EventHandler hit;
 
     protected void aoeDamage(float DamageBoxDuration = 0.0f, float DamageTimer = 0.0f)
     {
@@ -31,6 +36,9 @@ public abstract class BulletBehaviour : Poolable
 
         if (this.Effect != null)
             this.AddEffect(target.gameObject);
+
+        if (hit != null)
+            hit(this, EventArgs.Empty);
     }
 
     private void AddEffect(GameObject target)
@@ -48,32 +56,25 @@ public abstract class BulletBehaviour : Poolable
         }
     }
 
-    private void playParticles()
-    {
-
-    }
-
-    protected void playSound()
-    {
-
-    }
-
     public virtual void Fire()
     {
         if (TrailRenderer != null) TrailRenderer.enabled = true;
         if (TargetPos != null) transform.LookAt(TargetPos);
         GetComponent<Rigidbody>().velocity = speed * transform.forward;
     }
+    #endregion
 
+    #region MonoBehaviour
     // Use this for initialization
-    void Start()
+    protected virtual void Start()
     {
+        hit += GameObject.Find("GameFeel").GetComponent<SoundPlayer>().ShotHitHandler;
         this.GetComponent<Rigidbody>().freezeRotation = true;
         this.Recall();
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (this.isHoming)
         {
@@ -88,7 +89,9 @@ public abstract class BulletBehaviour : Poolable
         if (GetComponent<Rigidbody>().velocity.magnitude < 0.0f)
             this.Die();
     }
+    #endregion
 
+    #region Poolable Overrides
     public override uint ObjectId
     {
         get { return 0; }
@@ -128,4 +131,5 @@ public abstract class BulletBehaviour : Poolable
     {
         return "Bullet";
     }
+    #endregion
 }
