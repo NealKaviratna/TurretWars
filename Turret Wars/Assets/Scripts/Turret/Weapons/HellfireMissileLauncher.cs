@@ -25,15 +25,22 @@ public class HellfireMissileLauncher : Weapon
         var DummyGameObject = Instantiate(Resources.Load("dgo")) as GameObject;
         missilePool = new ObjectPool<HellfireMissileBehaviour>(DummyGameObject);
 
-        this.upgradeIcon = GameObject.Find("UI:HellfireMissileLauncher").transform.GetChild(0).GetComponent<Image>();
-        this.upgradeSprites = new System.Collections.Generic.Queue<Sprite>();
-        this.upgradeSprites.Enqueue(Resources.Load("normalUpgrade") as Sprite);
-        this.upgradeSprites.Enqueue(Resources.Load("ElementalUpgrade") as Sprite);
-        this.upgradeSprites.Enqueue(Resources.Load("normalUpgrade") as Sprite);
+        this.upgradeUISetup();
 
         base.Awake();
     }
-    
+
+    private void upgradeUISetup()
+    {
+        this.upgradeIcon = GameObject.Find("UI:HellfireMissileLauncher").transform.GetChild(0).GetComponent<Image>();
+        this.upgradeSprites = new System.Collections.Generic.Queue<Sprite>();
+        for (int i = 1; i < 4; i++)
+            this.upgradeSprites.Enqueue(Resources.Load<Sprite>("UpgradeIcon") as Sprite);
+        this.upgradeSprites.Enqueue(Resources.Load<Sprite>("LightningUpgradeIcon") as Sprite);
+        for (int i = 5; i < 10; i++)
+            this.upgradeSprites.Enqueue(Resources.Load<Sprite>("UpgradeIcon") as Sprite);
+    }
+
     public override void Fire()
     {
         RaycastHit hitInfo; ;
@@ -77,28 +84,24 @@ public class HellfireMissileLauncher : Weapon
         base.Fire();
     }
 
-    public void Update()
+    protected override void Update()
     {
         if (!gameObject.transform.parent.gameObject.GetComponent<NetworkIdentity>().isLocalPlayer) return;
 
         this.timer += Time.deltaTime;
-        if (Input.GetKey(KeyCode.Mouse0) && (this.fireRate <= this.timer))
+        if (Input.GetKey(KeyCode.Mouse0) && (this.timer >= this.fireRate))
         {
             Fire();
             this.timer = 0.0f;
         }
-        if (Input.GetKeyDown(KeyCode.U))
-            LevelUp();
+        base.Update();
     }
 
     public override void LevelUp()
     {
         switch (this.level++)
         {
-            case 0:
-                this.fireRate -= 0.1f;
-                break;
-            case 1:
+            case 4:
                 this.effect = gameObject.AddComponent<LightningEffectBehaviour>();
                 break;
             default:

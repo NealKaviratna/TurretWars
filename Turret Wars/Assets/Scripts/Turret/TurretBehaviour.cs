@@ -13,10 +13,14 @@ public class TurretBehaviour : NetworkBehaviour
     public List<Weapon> Weapons;
     public List<GameObject> UIPanels;
 
+    private BankBehaviour bank;
+
     // Use this for initialization
     void Start()
     {
         if (!GetComponentInParent<NetworkIdentity>().isLocalPlayer) return;
+
+        bank = GetComponentInParent<BankBehaviour>();
 
         foreach(Transform child in GameObject.Find("UI:Weapons").transform)
         {
@@ -31,6 +35,18 @@ public class TurretBehaviour : NetworkBehaviour
         {
             this.SwitchWeapon();
         }
+
+        foreach(Weapon weapon in Weapons)
+        {
+            if (weapon.UpgradePrice * 3 <= bank.Gold)
+            {
+                weapon.upgradeIcon.gameObject.SetActive(true);
+                weapon.upgradeIcon.GetComponentInChildren<Text>().text = (2 * weapon.UpgradePrice).ToString();
+            }
+            else
+                weapon.upgradeIcon.gameObject.SetActive(false);
+        }
+
     }
 
     void SwitchWeapon()

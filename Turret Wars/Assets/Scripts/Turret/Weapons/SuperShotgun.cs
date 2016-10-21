@@ -25,13 +25,21 @@ public class SuperShotgun : Weapon
         var DummyGameObject = Instantiate(Resources.Load("dgo")) as GameObject;
         bulletPool = new ObjectPool<ShotgunPelletBehaviour>(DummyGameObject);
 
-        this.upgradeIcon = GameObject.Find("UI:SuperShotgun").transform.GetChild(0).GetComponent<Image>();
-        this.upgradeSprites = new System.Collections.Generic.Queue<Sprite>();
-        this.upgradeSprites.Enqueue(Resources.Load("normalUpgrade") as Sprite);
-        this.upgradeSprites.Enqueue(Resources.Load("ElementalUpgrade") as Sprite);
-        this.upgradeSprites.Enqueue(Resources.Load("normalUpgrade") as Sprite);
+        this.upgradeUISetup();
 
         base.Awake();
+    }
+
+    private void upgradeUISetup()
+    {
+        this.upgradeIcon = GameObject.Find("UI:SuperShotgun").transform.GetChild(0).GetComponent<Image>();
+
+        this.upgradeSprites = new System.Collections.Generic.Queue<Sprite>();
+        for (int i = 1; i < 4; i++)
+            this.upgradeSprites.Enqueue(Resources.Load<Sprite>("UpgradeIcon") as Sprite);
+        this.upgradeSprites.Enqueue(Resources.Load<Sprite>("FireUpgradeIcon") as Sprite);
+        for (int i = 5; i < 10; i++)
+            this.upgradeSprites.Enqueue(Resources.Load<Sprite>("UpgradeIcon") as Sprite);
     }
 
     public override void Fire()
@@ -80,7 +88,7 @@ public class SuperShotgun : Weapon
         base.Fire();
     }
 
-    public void Update()
+    protected override void Update()
     {
         if (!gameObject.transform.parent.gameObject.GetComponent<NetworkIdentity>().isLocalPlayer) return;
 
@@ -90,22 +98,18 @@ public class SuperShotgun : Weapon
             Fire();
             this.timer = 0.0f;
         }
-        if (Input.GetKeyDown(KeyCode.U))
-            LevelUp();
+        base.Update();
     }
 
     public override void LevelUp()
     {
         switch (this.level++)
         {
-            case 0:
-                this.fireRate -= 0.1f;
-                break;
-            case 1:
+            case 4:
                 this.effect = gameObject.AddComponent<FireEffectBehaviour>();
                 break;
             default:
-                this.fireRate -= 0.1f;
+                this.fireRate -= 0.05f;
                 break;
         }
         base.LevelUp();
