@@ -56,6 +56,7 @@ public class Game : NetworkBehaviour
             Player player = GameObject.FindObjectsOfType<Player>()[0].GetComponent<Player>();
             player.gameObject.name = "LocalPlayer";
             player.gameObject.GetComponentInChildren<Camera>().enabled = true;
+            player.gameObject.GetComponentInChildren<AudioListener>().enabled = true;
             player.gameObject.transform.position = GameObject.Find("P1Spawn").transform.position;
             player.ID = 0;
             Players.Add(player);
@@ -84,6 +85,7 @@ public class Game : NetworkBehaviour
             player.gameObject.name = "LocalPlayer";
             player.gameObject.transform.position = GameObject.Find("P2Spawn").transform.position;
             player.gameObject.GetComponentInChildren<Camera>().enabled = true;
+            player.gameObject.GetComponentInChildren<AudioListener>().enabled = true;
             player.ID = 1;
             Players.Add(player);
             player.Battlezone = battlezone2;
