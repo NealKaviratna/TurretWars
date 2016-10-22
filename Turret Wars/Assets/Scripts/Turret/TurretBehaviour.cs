@@ -21,6 +21,7 @@ public class TurretBehaviour : NetworkBehaviour
         if (!GetComponentInParent<NetworkIdentity>().isLocalPlayer) return;
 
         bank = GetComponentInParent<BankBehaviour>();
+        Debug.Log(bank);
 
         foreach(Transform child in GameObject.Find("UI:Weapons").transform)
         {
@@ -31,7 +32,9 @@ public class TurretBehaviour : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GetComponentInParent<NetworkIdentity>().isLocalPlayer && Input.GetKeyDown(KeyCode.Mouse1))
+        if (!GetComponentInParent<NetworkIdentity>().isLocalPlayer) return;
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             this.SwitchWeapon();
         }
