@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 class FlankCreep : BaseCreep
 {
@@ -13,12 +14,12 @@ class FlankCreep : BaseCreep
     {
         flanked = false;
         flankTarget = creator.targetBattlezone.Nexus.transform.position;
-        flankTarget.x += Random.Range(0.0f, 1.0f) > .5f ? 8 : -8;
+        flankTarget.x += UnityEngine.Random.Range(0.0f, 1.0f) > .5f ? 8 : -8;
         flankTarget.z += 7;
         return base.Create(creator, creepId, position);
     }
 
-    void Update()
+    protected override void Update()
     {
         if (Vector3.Distance(flankTarget, this.transform.position) < 1)
             flanked = true;
@@ -26,6 +27,8 @@ class FlankCreep : BaseCreep
             transform.position = Vector3.MoveTowards(transform.position, target.position, Speed);
         else
             transform.position = Vector3.MoveTowards(transform.position, flankTarget, Speed);
+
+        base.Update();
     }
 
     /// <summary>
@@ -52,7 +55,13 @@ class FlankCreep : BaseCreep
 
 
         Color[] colors = { Color.green, Color.yellow, Color.red };
-        GetComponentInChildren<Renderer>().material.SetColor("_GridColour", colors[level - 1]);
+        Color[] basecolors = { Color.white, Color.black };
+
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+        {
+            r.material.SetColor("_GridColour", colors[level - 1]);
+            r.material.SetColor("_BaseColour", basecolors[(int) Math.Ceiling(level / 3.0)]);
+        }
     }
     #endregion
 

@@ -86,7 +86,7 @@ public class BaseCreep : Poolable {
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (this.Hp < 0)
         {

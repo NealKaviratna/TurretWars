@@ -4,17 +4,17 @@ using UnityEngine.SceneManagement;
 
 public class NewGame : MonoBehaviour {
 
-	void OnMouseEnter()
+	public void OnMouseEnter()
     {
         transform.localScale += new Vector3(0.1f, 0, 0);
     }
 
-    void OnMouseExit()
+    public void OnMouseExit()
     {
         transform.localScale -= new Vector3(0.1f, 0, 0);
     }
 
-    void OnMouseDown()
+    public void OnMouseDown()
     {
         SceneManager.LoadScene("TurretTest");
     }

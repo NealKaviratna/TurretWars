@@ -22,15 +22,21 @@ public class TankCreep : BaseCreep
     /// <param name="level">The level for the creep to be associated with</param>
     public override void SetLevel(int level)
     {
-        this.maxHp = 300.0f * (level / 4.0f);
+        float multiplier = level < 3 ? level : 2.5f;
+
+        this.maxHp = 300.0f * (multiplier / 4.0f);
 
         this.Hp = this.maxHp;
-        this.Speed = 0.025f * (level);
-        this.Value = 15 * level;
+        this.Speed = 0.05f * (multiplier);
+        this.Value = (int) Math.Ceiling(15 * multiplier);
 
         Color[] colors = { Color.green, Color.yellow, Color.red };
+        Color[] basecolors = { Color.white, Color.black };
         foreach (Renderer r in GetComponentsInChildren<Renderer>())
+        {
             r.material.SetColor("_GridColour", colors[level - 1]);
+            r.material.SetColor("_BaseColour", basecolors[(int)Math.Ceiling(level / 3.0)]);
+        }
     }
     #endregion
 }
