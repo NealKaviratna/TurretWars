@@ -56,10 +56,11 @@ public class Game : NetworkBehaviour
             Player player = GameObject.FindObjectsOfType<Player>()[0].GetComponent<Player>();
             player.gameObject.name = "LocalPlayer";
             player.gameObject.GetComponentInChildren<Camera>().enabled = true;
+            player.gameObject.GetComponentInChildren<AudioListener>().enabled = true;
             player.gameObject.transform.position = GameObject.Find("P1Spawn").transform.position;
             player.ID = 0;
             Players.Add(player);
-            player.battlezone = battlezone1;
+            player.Battlezone = battlezone1;
             player.targetBattlezone = battlezone2;
 
             GameObject go = GameObject.FindGameObjectsWithTag("CreepController")[0];
@@ -73,7 +74,7 @@ public class Game : NetworkBehaviour
             player.gameObject.name = "Player1onP2client";
             player.ID = 0;
             Players.Add(player);
-            player.battlezone = battlezone1;
+            player.Battlezone = battlezone1;
             player.targetBattlezone = battlezone2;
 
             GameObject go = GameObject.FindGameObjectsWithTag("CreepController")[0];
@@ -84,9 +85,10 @@ public class Game : NetworkBehaviour
             player.gameObject.name = "LocalPlayer";
             player.gameObject.transform.position = GameObject.Find("P2Spawn").transform.position;
             player.gameObject.GetComponentInChildren<Camera>().enabled = true;
+            player.gameObject.GetComponentInChildren<AudioListener>().enabled = true;
             player.ID = 1;
             Players.Add(player);
-            player.battlezone = battlezone2;
+            player.Battlezone = battlezone2;
             player.targetBattlezone = battlezone1;
 
             go = GameObject.FindGameObjectsWithTag("CreepController")[1];
@@ -100,7 +102,7 @@ public class Game : NetworkBehaviour
             player.gameObject.name = "Player2onP1client";
             player.ID = 1;
             Players.Add(player);
-            player.battlezone = battlezone2;
+            player.Battlezone = battlezone2;
             player.targetBattlezone = battlezone1;
 
             GameObject go = GameObject.FindGameObjectsWithTag("CreepController")[1];

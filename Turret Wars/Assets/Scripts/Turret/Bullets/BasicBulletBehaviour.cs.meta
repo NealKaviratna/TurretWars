@@ -1,10 +1,14 @@
 fileFormatVersion: 2
 guid: 57c5653bb512d89419b1185e2e452cfa
-timeCreated: 1465241332
+timeCreated: 1476829851
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Target: {instanceID: 0}
+  - TrailRenderer: {instanceID: 0}
+  - Effect: {instanceID: 0}
+  - HitSFX: {fileID: 8300000, guid: 98a3c450dbd1ace459ee7fed3287f884, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

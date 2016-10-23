@@ -15,9 +15,9 @@ public class BaseCreep : Poolable {
     protected float maxHp = 100.0f;
     private uint creepId;
     
-    public float hp = 100.0f;
-    public float speed = 0.07f;
-    public int value = 10;
+    public float Hp = 100.0f;
+    public float Speed = 0.07f;
+    public int Value = 10;
 
     private bool inUse = false;
 
@@ -42,7 +42,8 @@ public class BaseCreep : Poolable {
         this.creepId = creepId;
 
         transform.position = Util.GetPointInCollider(creator.TargetBattlezone.CreepSpawner);
-        this.hp = maxHp;
+        transform.LookAt(this.target);
+        this.Hp = maxHp;
         this.gameObject.SetActive(true);
         this.inUse = true;
         return this;
@@ -72,9 +73,9 @@ public class BaseCreep : Poolable {
     {
         this.maxHp = 100.0f;
 
-        this.hp = this.maxHp;
-        this.speed = 0.1f * (level / 2.0f);
-        this.value = 10 * level;
+        this.Hp = this.maxHp;
+        this.Speed = 0.1f * (level / 2.0f);
+        this.Value = 10 * level;
     }
     #endregion
 
@@ -87,7 +88,15 @@ public class BaseCreep : Poolable {
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed);
+        if (this.Hp < 0)
+        {
+            this.Die();
+            GameObject.Find("LocalPlayer").GetComponent<BankBehaviour>().Gold += this.Value;
+            GameObject go = Instantiate(Resources.Load("+gold")) as GameObject;
+            go.transform.position = this.transform.position;
+        }
+
+        transform.position = Vector3.MoveTowards(transform.position, target.position, Speed);
     }
     #endregion
 }

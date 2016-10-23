@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class BasicMachineGun : Weapon
@@ -10,32 +11,85 @@ public class BasicMachineGun : Weapon
 
     private ObjectPool<BasicBulletBehaviour> bulletPool;
 
+    private float timer;
+
     // Use this for initialization
-    void Start()
+    protected override void Awake()
     {
         this.level = 0;
-        this.fireRate = 0.5f;
+        this.fireRate = 0.1f;
+        this.timer = this.fireRate;
+
         var DummyGameObject = Instantiate(Resources.Load("dgo")) as GameObject;
         bulletPool = new ObjectPool<BasicBulletBehaviour>(DummyGameObject);
+
+        this.upgradeUISetup();
+
+        base.Awake();
     }
-    
+
+
+
+    private void upgradeUISetup()
+    {
+        this.upgradeIcon = GameObject.Find("UI:MachineGun").transform.GetChild(0).GetComponent<Image>();
+        this.upgradeSprites = new System.Collections.Generic.Queue<Sprite>();
+        for (int i = 1; i < 4; i++)
+            this.upgradeSprites.Enqueue(Resources.Load<Sprite>("UpgradeIcon") as Sprite);
+        this.upgradeSprites.Enqueue(Resources.Load<Sprite>("IceUpgradeIcon") as Sprite);
+        for (int i = 5; i < 10; i++)
+            this.upgradeSprites.Enqueue(Resources.Load<Sprite>("UpgradeIcon") as Sprite);
+    }
+
     public override void Fire()
     {
         RaycastHit hitInfo; ;
 
         BulletBehaviour b = bulletPool.Create(Player, 0, MuzzleTrans.position) as BulletBehaviour;
-        if (Physics.Raycast(MuzzleTrans.position, this.transform.forward, out hitInfo))
+        if (Physics.Raycast(Player.transform.position, Player.transform.forward, out hitInfo))
         {
             b.TargetPos = hitInfo.point;
-            b.Target = hitInfo.transform.gameObject;
         }
+        else
+        {
+            b.TargetPos = MuzzleTrans.position + this.transform.parent.forward;
+        }
+
+        if (this.effect != null)
+        {
+            b.Effect = this.effect;
+            if (this.effect.hasColor)
+                this.effect.SetTargetColor(b.gameObject);
+        }
+
         b.Fire();
+        base.Fire();
     }
 
-    public void Update()
+    protected override void Update()
     {
         if (!gameObject.transform.parent.gameObject.GetComponent<NetworkIdentity>().isLocalPlayer) return;
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+
+        this.timer += Time.deltaTime;
+        if (Input.GetKey(KeyCode.Mouse0) && (this.fireRate <= this.timer))
+        {
             Fire();
+            this.timer = 0.0f;
+        }
+        base.Update();
+    }
+
+    public override void LevelUp()
+    {
+        switch (this.level++)
+        {
+            case 4:
+                this.effect = gameObject.AddComponent<FrostEffectBehaviour>();
+                break;
+            default:
+                this.fireRate -= 0.05f;
+                break;
+        }
+        base.LevelUp();
     }
 }
