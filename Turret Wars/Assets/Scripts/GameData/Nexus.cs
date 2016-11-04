@@ -38,11 +38,23 @@ public class Nexus : MonoBehaviour
     void OnTriggerEnter(Collider coll)
     {
         var creep = coll.gameObject.GetComponent<BaseCreep>();
-        if (creep != null && Player.isLocalPlayer)
+        if (creep != null)
         {
             Lives--;
-            GameObject.Find("UI:Lives").GetComponent<Text>().text = "Lives: " + Lives.ToString();
-            creep.Die();
+            if (Player.isLocalPlayer)
+            {
+                GameObject.Find("UI:Lives").GetComponent<Text>().text = "Lives: " + Lives.ToString();
+                creep.Die();
+            }
+        }
+
+        if (Lives <= 0)
+        {
+            Player.CmdGameOver();
+            if (Player.isLocalPlayer)
+                Application.LoadLevelAdditive(2);
+            else
+                Application.LoadLevelAdditive(3);
         }
     }
 }

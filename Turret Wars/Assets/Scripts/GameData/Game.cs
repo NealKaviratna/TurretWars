@@ -62,6 +62,7 @@ public class Game : NetworkBehaviour
             Players.Add(player);
             player.Battlezone = battlezone1;
             player.targetBattlezone = battlezone2;
+            GameObject.Find("P1RadarCamera").GetComponent<Camera>().enabled = true;
 
             GameObject go = GameObject.FindGameObjectsWithTag("CreepController")[0];
             player.CreepController = go.GetComponent<CreepController>();
@@ -90,6 +91,7 @@ public class Game : NetworkBehaviour
             Players.Add(player);
             player.Battlezone = battlezone2;
             player.targetBattlezone = battlezone1;
+            GameObject.Find("P2RadarCamera").GetComponent<Camera>().enabled = true;
 
             go = GameObject.FindGameObjectsWithTag("CreepController")[1];
             player.CreepController = go.GetComponent<CreepController>();

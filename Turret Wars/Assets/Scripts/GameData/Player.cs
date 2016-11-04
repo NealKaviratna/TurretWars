@@ -65,6 +65,20 @@ public class Player : NetworkBehaviour
         GameObject.FindGameObjectWithTag("GameController").GetComponent<Game>().AddPlayer();
     }
 
+
+
+    [Command]
+    public void CmdGameOver()
+    {
+        this.RpcGameOver();
+    }
+
+    [ClientRpc]
+    public void RpcGameOver()
+    {
+        this.battlezone.Nexus.GetComponent<Nexus>().Lives = -1;
+    }
+
     public void Update()
     {
         if (!isLocalPlayer) return;
