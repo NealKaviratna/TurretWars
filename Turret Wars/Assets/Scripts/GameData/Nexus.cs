@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// The thing the player is trying to stop creeps from reaching.
@@ -52,9 +53,9 @@ public class Nexus : MonoBehaviour
         {
             Player.CmdGameOver();
             if (Player.isLocalPlayer)
-                Application.LoadLevelAdditive(2);
+                SceneManager.LoadScene(2,LoadSceneMode.Additive);
             else
-                Application.LoadLevelAdditive(3);
+                SceneManager.LoadScene(3, LoadSceneMode.Additive);
         }
     }
 }

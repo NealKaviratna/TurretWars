@@ -2,6 +2,9 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Used with original main menu, deprecated.
+/// </summary>
 public class NewGame : MonoBehaviour {
 
 	public void OnMouseEnter()
