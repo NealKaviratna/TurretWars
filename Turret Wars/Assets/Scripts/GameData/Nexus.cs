@@ -41,17 +41,21 @@ public class Nexus : MonoBehaviour
         var creep = coll.gameObject.GetComponent<BaseCreep>();
         if (creep != null)
         {
-            Lives--;
             if (Player.isLocalPlayer)
             {
-                GameObject.Find("UI:Lives").GetComponent<Text>().text = "Lives: " + Lives.ToString();
+                Lives--;
+                GameObject.Find("UI:Lives").GetComponent<Text>().text = Lives.ToString();
+                Player.CmdSyncLives((uint)Lives);
                 creep.Die();
+            }
+            else
+            {
+                GameObject.Find("UI:EnemyLives").GetComponent<Text>().text = Lives.ToString();
             }
         }
 
         if (Lives <= 0)
         {
-            Player.CmdGameOver();
             if (Player.isLocalPlayer)
                 SceneManager.LoadScene(2,LoadSceneMode.Additive);
             else

@@ -38,7 +38,7 @@ public class BankBehaviour : NetworkBehaviour
         set
         {
             this.gold = value;
-            GameObject.Find("UI:Gold").GetComponent<Text>().text = "Gold: " + gold.ToString();
+            GameObject.Find("UI:Gold").GetComponent<Text>().text = gold.ToString();
         }
     }
 
@@ -51,7 +51,7 @@ public class BankBehaviour : NetworkBehaviour
         gold = 100;
 
         if (isLocalPlayer)
-            GameObject.Find("UI:Gold").GetComponent<Text>().text = "Gold: " + gold.ToString();
+            GameObject.Find("UI:Gold").GetComponent<Text>().text = gold.ToString();
     }
 
     // Update is called once per frame
@@ -68,7 +68,7 @@ public class BankBehaviour : NetworkBehaviour
             gold += incomeAmount;
             incomeTimer = incomeCycleLength;
             timeAtUpdate = incomeCycleLength;
-            GameObject.Find("UI:Gold").GetComponent<Text>().text = "Gold: " + gold.ToString();
+            GameObject.Find("UI:Gold").GetComponent<Text>().text = gold.ToString();
         }
     }
 }

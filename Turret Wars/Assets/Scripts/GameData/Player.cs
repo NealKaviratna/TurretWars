@@ -68,15 +68,15 @@ public class Player : NetworkBehaviour
 
 
     [Command]
-    public void CmdGameOver()
+    public void CmdSyncLives(uint lives)
     {
-        this.RpcGameOver();
+        this.RpcSyncLives(lives);
     }
 
     [ClientRpc]
-    public void RpcGameOver()
+    public void RpcSyncLives(uint lives)
     {
-        this.battlezone.Nexus.GetComponent<Nexus>().Lives = -1;
+        this.battlezone.Nexus.GetComponent<Nexus>().Lives = (int) lives;
     }
 
     public void Update()
