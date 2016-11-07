@@ -21,6 +21,7 @@ public class Game : NetworkBehaviour
         base.OnStartClient();
         this.battlezone1 = GameObject.Find("Battlezone").GetComponent<Battlezone>();
         this.battlezone2 = GameObject.Find("Battlezone2").GetComponent<Battlezone>();
+        GameObject.Find("Music").GetComponent<AudioSource>().Play();
     }
 
     /// <summary>
