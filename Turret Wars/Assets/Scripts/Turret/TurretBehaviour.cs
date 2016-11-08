@@ -13,6 +13,12 @@ public class TurretBehaviour : NetworkBehaviour
     public List<Weapon> Weapons;
     public List<GameObject> UIPanels;
 
+    public bool leftGun;
+
+    public List<Vector2> mins;
+    public List<Vector2> maxs;
+    public List<Vector3> scales;
+
     private BankBehaviour bank;
 
     // Use this for initialization
@@ -21,11 +27,17 @@ public class TurretBehaviour : NetworkBehaviour
         if (!GetComponentInParent<NetworkIdentity>().isLocalPlayer) return;
 
         bank = GetComponentInParent<BankBehaviour>();
-        Debug.Log(bank);
+
+        mins = new List<Vector2>();
+        maxs = new List<Vector2>();
+        scales = new List<Vector3>();
 
         foreach(Transform child in GameObject.Find("UI:Weapons").transform)
         {
             UIPanels.Add(child.gameObject);
+            mins.Add(child.gameObject.GetComponent<RectTransform>().anchorMin);
+            maxs.Add(child.gameObject.GetComponent<RectTransform>().anchorMax);
+            scales.Add(child.gameObject.GetComponent<RectTransform>().localScale);
         }
     }
 
@@ -58,13 +70,29 @@ public class TurretBehaviour : NetworkBehaviour
         {
             if (Weapons[i].enabled)
             {
+                int next = (i + 1) % Weapons.Count;
                 Weapons[i].enabled = false;
-                UIPanels[i].GetComponent<Image>().color = new Color(100, 100, 100, 0);
-                int next = i + 1 < Weapons.Count ? i + 1 : 0;
                 Weapons[next].enabled = true;
-                UIPanels[next].GetComponent<Image>().color = new Color(255, 255, 255, 255);
                 break;
             }
         }
+
+        for (int i = 0; i < Weapons.Count; i++)
+        {
+            int next = (i + 1) % Weapons.Count;
+            SwitchUI(next, i);
+        }
+
+        UIPanels.Insert(0, UIPanels[UIPanels.Count - 1]);
+        UIPanels.RemoveAt(UIPanels.Count - 1);
+    }
+
+    void SwitchUI(int next, int i)
+    {
+        if (leftGun) return;
+        
+        UIPanels[i].GetComponent<RectTransform>().anchorMin = mins[next];
+        UIPanels[i].GetComponent<RectTransform>().anchorMax = maxs[next];
+        UIPanels[i].GetComponent<RectTransform>().localScale = scales[next];
     }
 }

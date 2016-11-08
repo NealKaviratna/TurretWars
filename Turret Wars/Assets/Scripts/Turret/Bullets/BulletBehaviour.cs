@@ -20,7 +20,7 @@ public abstract class BulletBehaviour : Poolable
     protected float turnSpeed = 0.1f;
     protected bool inUse = false;
 
-    private float timer = 0.0f;
+    protected float timer = 0.0f;
 
     #region Bullet Sandbox
     protected float damageAmount = 10.0f;
@@ -71,7 +71,9 @@ public abstract class BulletBehaviour : Poolable
     protected virtual void Start()
     {
         this.HitSFX = Resources.Load("LaserHitSFX") as AudioClip;
-        hit += GameObject.Find("GameFeel").GetComponent<SoundPlayer>().ShotHitHandler;
+        var gf = GameObject.Find("GameFeel");
+        if (gf != null)
+            hit += gf.GetComponent<SoundPlayer>().ShotHitHandler;
         this.GetComponent<Rigidbody>().freezeRotation = true;
         this.Recall();
     }
