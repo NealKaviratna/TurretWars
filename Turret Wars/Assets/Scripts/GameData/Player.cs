@@ -70,12 +70,14 @@ public class Player : NetworkBehaviour
     [Command]
     public void CmdSyncLives(uint lives)
     {
+        Debug.LogError("sync attempt");
         this.RpcSyncLives(lives);
     }
 
     [ClientRpc]
     public void RpcSyncLives(uint lives)
     {
+        Debug.LogError("sync successful");
         this.battlezone.Nexus.GetComponent<Nexus>().Lives = (int) lives;
     }
 

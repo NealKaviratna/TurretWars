@@ -50,6 +50,7 @@ public class Nexus : MonoBehaviour
             }
             else
             {
+                Lives--;
                 GameObject.Find("UI:EnemyLives").GetComponent<Text>().text = Lives.ToString();
             }
         }
