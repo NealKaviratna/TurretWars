@@ -6,10 +6,16 @@ using System.Collections;
 /// </summary>
 public class MenuBulletBehaviour : BulletBehaviour
 {
+    public float Speed
+    {
+        get { return this.speed; }
+        set { this.speed = value; }
+    }
+
     public override Poolable Create(Player player, uint id, Vector3 pos)
     {
         base.Create(player, id, pos);
-        this.timer = 10.0f;
+        this.timer = 30.0f;
         return this;
     }
 
@@ -20,7 +26,7 @@ public class MenuBulletBehaviour : BulletBehaviour
 
     void OnCollisionEnter(Collision coll)
     {
-        if (this.timer < 9.95f)
+        if (this.timer < 29.95f)
             this.Die();
     }
 }
