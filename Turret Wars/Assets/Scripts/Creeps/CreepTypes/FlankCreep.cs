@@ -14,14 +14,14 @@ class FlankCreep : BaseCreep
     {
         flanked = false;
         flankTarget = creator.targetBattlezone.Nexus.transform.position;
-        flankTarget.x += UnityEngine.Random.Range(0.0f, 1.0f) > .5f ? 8 : -8;
-        flankTarget.z += 7;
+        flankTarget.x += UnityEngine.Random.Range(0.0f, 1.0f) > .5f ? 12 : -12;
+        flankTarget.z += 15;
         return base.Create(creator, creepId, position);
     }
 
     protected override void Update()
     {
-        if (Vector3.Distance(flankTarget, this.transform.position) < 1)
+        if (Vector3.Distance(flankTarget, this.transform.position) < 3)
             flanked = true;
         if(flanked)
             transform.position = Vector3.MoveTowards(transform.position, target.position, Speed);
