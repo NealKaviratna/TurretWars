@@ -22,7 +22,7 @@ public class WalkerCreep : BaseCreep
     /// <param name="level">The level for the creep to be associated with</param>
     public override void SetLevel(int level)
     {
-        this.maxHp = 100.0f * (level / 4.0f);
+        this.maxHp = 50.0f * (level / 4.0f);
 
         this.Hp = this.maxHp;
         this.Speed = 0.2f * (level);
