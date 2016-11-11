@@ -70,7 +70,7 @@ public class MenuShootingScript : MonoBehaviour
                 b.TargetPos = tankSpawnPointTwo.position;
                 b.Fire();
                 b.transform.parent = canvas.transform;
-                b.transform.SetSiblingIndex(0);
+                b.transform.SetSiblingIndex(2);
                 b.transform.rotation = Quaternion.identity;
             }
             else
@@ -80,7 +80,7 @@ public class MenuShootingScript : MonoBehaviour
                 b.TargetPos = tankSpawnPointOne.position;
                 b.Fire();
                 b.transform.parent = canvas.transform;
-                b.transform.SetSiblingIndex(0);
+                b.transform.SetSiblingIndex(2);
                 b.transform.rotation = Quaternion.identity;
             }
         }
@@ -95,7 +95,7 @@ public class MenuShootingScript : MonoBehaviour
                 b.TargetPos = creepSpawnPointTwo.position;
                 b.Fire();
                 b.transform.parent = canvas.transform;
-                b.transform.SetSiblingIndex(0);
+                b.transform.SetSiblingIndex(2);
                 b.transform.rotation = Quaternion.identity;
             }
             else
@@ -105,7 +105,7 @@ public class MenuShootingScript : MonoBehaviour
                 b.TargetPos = creepSpawnPointOne.position;
                 b.Fire();
                 b.transform.parent = canvas.transform;
-                b.transform.SetSiblingIndex(0);
+                b.transform.SetSiblingIndex(2);
                 b.transform.rotation = Quaternion.identity;
             }
         }
