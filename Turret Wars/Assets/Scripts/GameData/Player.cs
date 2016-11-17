@@ -44,6 +44,7 @@ public class Player : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
+        transform.LookAt(GameObject.Find("portal").transform);
         this.CmdSetup();
         // Hack because can't pass back ints from commands without unnecessarily complicated stuff
         // this.id = GameObject.FindGameObjectWithTag("GameController").GetComponent<Game>().Players.Count - 1;

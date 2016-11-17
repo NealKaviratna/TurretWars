@@ -60,7 +60,8 @@ public class HellfireMissileLauncher : Weapon
             foreach (HellfireMissileBehaviour missile in missiles)
             {
                 Quaternion rotation = Quaternion.Euler(Random.Range(-30, -60), Random.Range(-15, 15), 0);
-                missile.TargetPos = this.MuzzleTrans.position + (rotation * Player.transform.forward);
+                Vector3 vecToTarget = hitInfo.collider.transform.position - this.transform.position;
+                missile.TargetPos = this.MuzzleTrans.position + (rotation * vecToTarget);
                 missile.Target = hitInfo.collider.gameObject;
             }
         }
