@@ -91,6 +91,7 @@ public abstract class BulletBehaviour : Poolable
             {
                 Vector3 direction = Target.transform.position - transform.position;
                 Quaternion targetRotation = Quaternion.FromToRotation(transform.forward, direction);
+
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed);
             }
             GetComponent<Rigidbody>().velocity = speed * transform.forward;

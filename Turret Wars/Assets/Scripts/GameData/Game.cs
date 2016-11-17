@@ -83,6 +83,7 @@ public class Game : NetworkBehaviour
             player.CreepController = go.GetComponent<CreepController>();
 
             Debug.LogError("Updating Player 2 Client");
+            GameObject.Find("Stage").transform.Rotate(new Vector3(0, 180, 0));
             player = GameObject.FindObjectsOfType<Player>()[0].GetComponent<Player>();
             player.gameObject.name = "LocalPlayer";
             player.gameObject.transform.position = GameObject.Find("P2Spawn").transform.position;
