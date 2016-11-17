@@ -37,6 +37,10 @@ public class ObjectPool<T> where T : Poolable, new()
         foreach (T t in pool)
         {
             t.GetComponentInChildren<Image>().sprite = image;
+            Color[] colors = { Color.red, Color.green, Color.yellow };
+            t.GetComponentInChildren<Image>().color = colors[Random.Range(0, 3)];
+            t.GetComponentInChildren<Image>().rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 5);
+            t.GetComponentInChildren<Image>().rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 500);
         }
     } 
 }

@@ -24,7 +24,7 @@ public class TankCreep : BaseCreep
     {
         float multiplier = level < 3 ? level : 2.5f;
 
-        this.maxHp = 300.0f * (multiplier / 4.0f);
+        this.maxHp = 150.0f * (multiplier / 4.0f);
 
         this.Hp = this.maxHp;
         this.Speed = 0.05f * (multiplier);
