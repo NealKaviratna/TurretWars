@@ -8,6 +8,8 @@ using UnityEngine.UI;
 /// </summary>
 public class BankBehaviour : NetworkBehaviour
 {
+    public bool start = false;
+
     private float incomeTimer;
     private float incomeCycleLength = 10.0f;
 
@@ -78,7 +80,7 @@ public class BankBehaviour : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isLocalPlayer) return;
+        if (!isLocalPlayer || !start) return;
         IncomeTimer -= Time.deltaTime;
 
         if (incomeTimer < 0)

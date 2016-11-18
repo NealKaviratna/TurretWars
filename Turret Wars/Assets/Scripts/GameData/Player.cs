@@ -20,6 +20,7 @@ public class Player : NetworkBehaviour
     public GameObject GamePrefab;
 
     public CreepBank CreepBank;
+    public BankBehaviour bank;
 
     public int ID
     {
@@ -88,92 +89,92 @@ public class Player : NetworkBehaviour
         // TODO: make this cleaner
         if (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (GetComponent<BankBehaviour>().Gold >= 10 && CreepBank.CreepLeft(1))
+            if (bank.Gold >= 10 && CreepBank.CreepLeft(1))
             {
 
                 CreepController.SpawnCreep(this.id, CreepNo.Walker1);
-                GetComponent<BankBehaviour>().Gold -= 10;
-                GetComponent<BankBehaviour>().IncomeAmount += 5;
+                bank.Gold -= 10;
+                bank.IncomeAmount += 5;
             }
         }
         if (Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (GetComponent<BankBehaviour>().Gold >= 25 && CreepBank.CreepLeft(2))
+            if (bank.Gold >= 25 && CreepBank.CreepLeft(2))
             {
 
                 CreepController.SpawnCreep(this.id, CreepNo.Walker2);
-                GetComponent<BankBehaviour>().Gold -= 25;
-                GetComponent<BankBehaviour>().IncomeAmount += 10;
+                bank.Gold -= 25;
+                bank.IncomeAmount += 10;
             }
         }
         if (Input.GetKeyDown(KeyCode.Keypad3) || Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (GetComponent<BankBehaviour>().Gold >= 50 && CreepBank.CreepLeft(3))
+            if (bank.Gold >= 50 && CreepBank.CreepLeft(3))
             {
 
                 CreepController.SpawnCreep(this.id, CreepNo.Walker3);
-                GetComponent<BankBehaviour>().Gold -= 50;
-                GetComponent<BankBehaviour>().IncomeAmount += 25;
+                bank.Gold -= 50;
+                bank.IncomeAmount += 25;
             }
         }
         if (Input.GetKeyDown(KeyCode.Keypad4) || Input.GetKeyDown(KeyCode.Alpha4))
         {
-            if (GetComponent<BankBehaviour>().Gold >= 30 && CreepBank.CreepLeft(4))
+            if (bank.Gold >= 30 && CreepBank.CreepLeft(4))
             {
 
                 CreepController.SpawnCreep(this.id, CreepNo.Tank1);
-                GetComponent<BankBehaviour>().Gold -= 30;
-                GetComponent<BankBehaviour>().IncomeAmount += 15;
+                bank.Gold -= 30;
+                bank.IncomeAmount += 15;
             }
         }
         if (Input.GetKeyDown(KeyCode.Keypad5) || Input.GetKeyDown(KeyCode.Alpha5))
         {
-            if (GetComponent<BankBehaviour>().Gold >= 60 && CreepBank.CreepLeft(5))
+            if (bank.Gold >= 60 && CreepBank.CreepLeft(5))
             {
 
                 CreepController.SpawnCreep(this.id, CreepNo.Tank2);
-                GetComponent<BankBehaviour>().Gold -= 60;
-                GetComponent<BankBehaviour>().IncomeAmount += 30;
+                bank.Gold -= 60;
+                bank.IncomeAmount += 30;
             }
         }
         if (Input.GetKeyDown(KeyCode.Keypad6) || Input.GetKeyDown(KeyCode.Alpha6))
         {
-            if (GetComponent<BankBehaviour>().Gold >= 90 && CreepBank.CreepLeft(6))
+            if (bank.Gold >= 90 && CreepBank.CreepLeft(6))
             {
 
                 CreepController.SpawnCreep(this.id, CreepNo.Tank3);
-                GetComponent<BankBehaviour>().Gold -= 90;
-                GetComponent<BankBehaviour>().IncomeAmount += 45;
+                bank.Gold -= 90;
+                bank.IncomeAmount += 45;
             }
         }
         if (Input.GetKeyDown(KeyCode.Keypad7) || Input.GetKeyDown(KeyCode.Alpha7))
         {
-            if (GetComponent<BankBehaviour>().Gold >= 30 && CreepBank.CreepLeft(7))
+            if (bank.Gold >= 30 && CreepBank.CreepLeft(7))
             {
 
                 CreepController.SpawnCreep(this.id, CreepNo.Flank1);
-                GetComponent<BankBehaviour>().Gold -= 30;
-                GetComponent<BankBehaviour>().IncomeAmount += 15;
+                bank.Gold -= 30;
+                bank.IncomeAmount += 15;
             }
         }
         if (Input.GetKeyDown(KeyCode.Keypad8) || Input.GetKeyDown(KeyCode.Alpha8))
         {
-            if (GetComponent<BankBehaviour>().Gold >= 60 && CreepBank.CreepLeft(8))
+            if (bank.Gold >= 60 && CreepBank.CreepLeft(8))
             {
 
                 CreepController.SpawnCreep(this.id, CreepNo.Flank2);
-                GetComponent<BankBehaviour>().Gold -= 60;
-                GetComponent<BankBehaviour>().IncomeAmount += 30;
+                bank.Gold -= 60;
+                bank.IncomeAmount += 30;
             }
         }
         if (Input.GetKeyDown(KeyCode.Keypad9) || Input.GetKeyDown(KeyCode.Alpha9))
         {
-            if (GetComponent<BankBehaviour>().Gold >= 90 && CreepBank.CreepLeft(9))
+            if (bank.Gold >= 90 && CreepBank.CreepLeft(9))
             {
 
                 CreepController.SpawnCreep(this.id, CreepNo.Flank3);
-                GetComponent<BankBehaviour>().Gold -= 90;
-                GetComponent<BankBehaviour>().IncomeAmount += 45;
+                bank.Gold -= 90;
+                bank.IncomeAmount += 45;
             }
         }
     }

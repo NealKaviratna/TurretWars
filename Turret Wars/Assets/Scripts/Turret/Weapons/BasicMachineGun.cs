@@ -43,11 +43,12 @@ public class BasicMachineGun : Weapon
 
     public override void Fire()
     {
-        RaycastHit hitInfo; ;
-
+        RaycastHit hitInfo;
+        int layerMask = ~(1 << 5);
         BulletBehaviour b = bulletPool.Create(Player, 0, MuzzleTrans.position) as BulletBehaviour;
-        if (Physics.Raycast(Player.transform.position, Player.transform.forward, out hitInfo))
+        if (Physics.Raycast(Player.transform.position, Player.transform.forward, out hitInfo, 1000 ,layerMask))
         {
+            //Debug.Log("hitting: " + hitInfo.collider.gameObject.ToString());
             b.TargetPos = hitInfo.point;
         }
         else

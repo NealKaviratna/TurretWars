@@ -11,7 +11,7 @@ public class ObjectPool<T> where T : Poolable, new()
 
     public ObjectPool(GameObject dummyGameObject)
     {
-        PoolSize = 300;
+        PoolSize = 100;
         dummyGameObject.AddComponent<T>();
         pool = new T[PoolSize];
         for (int i = 0; i < PoolSize; i++)
