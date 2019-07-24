@@ -9,9 +9,9 @@ VGdev Fall 2016
 
 # Credits
 
-NEAL KAVIRATNA - Project Lead
-AVERY BARTLETT - UI Design, 3D Artist
-EMILY CHEN - 2D Artist
-ANTHONY SANTIAGO - Programming
-JONATHAN HUNTER - Programmomg
-JARROD BLANTON - Musician
+- NEAL KAVIRATNA - Project Lead
+- AVERY BARTLETT - UI Design, 3D Artist
+- EMILY CHEN - 2D Artist
+- ANTHONY SANTIAGO - Programming
+- JONATHAN HUNTER - Programmomg
+- JARROD BLANTON - Musician
